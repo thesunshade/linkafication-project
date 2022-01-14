@@ -74,5 +74,15 @@ decorated.forEach(item => {
       /<span class='ref'>AN\.v\.(\d+)(.*)<\/span>/g,
       "<a class='ref' data-division='/sutta/an' data-reference='pts-vp-pli5.$1' data-url='/en/sujato'>AN.v.$1$2</a>"
     );
+  // DHAMMAPADA
+  item.text = item.text.replace(
+    /<span class='ref'>Dhp\.(\d+)(.*)<\/span>/g,
+    "<a class='ref' data-division='/sutta/kn/dhp' data-reference='vnp.$1' data-url='/en/sujato'>Dhp.$1$2</a>"
+  );
+  // SUTTA NIPATA
+  item.text = item.text.replace(
+    /<span class='ref'>Snp\.(\d+)(.*)<\/span>/g,
+    "<a class='ref' data-division='/sutta/kn/snp' data-reference='vnp.$1' data-url='/en/sujato'>Snp.$1$2</a>"
+  );
 });
 console.log(decorated);
