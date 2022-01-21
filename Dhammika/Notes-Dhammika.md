@@ -3,6 +3,8 @@ Notes-Dhammika
 
 # TODO
 - [] Ap citations
+- [ ] Bv citation, possibly convert to a different format
+- [ ] Nidd citation
 
 # Potential further work
 

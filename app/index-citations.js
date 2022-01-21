@@ -4,7 +4,7 @@ const regex = new RegExp("<span class='ref'>(.+?)</span>", "g");
 const regex1 = new RegExp("<span class='ref'>");
 const regex2 = new RegExp("</span>");
 const excludedDhammika = ["Bcv", "Jm", "Vism", "Bc", "Mvu"];
-const excludedDPPN = ["CAGI", "Cyp", "DhSA", "Dpv", "Mvb", "MT", "Sp"];
+const excludedDPPN = ["CAGI", "Cyp", "DhSA", "Dpv", "Mbv", "MT", "Sp", "Mhv"];
 const excludedCommentary = [
   "DN-a",
   "MN-a",
@@ -26,7 +26,7 @@ const excludedCommentary = [
   "Kvu-a",
   "Ne-a",
   "Dhs-a",
-  "Pp-a",
+  "Pp-a", "Bu-a", "Nid-a"
 ];
 const excludedPED = [
   "Abhp",
@@ -68,13 +68,15 @@ const cannotFigureOutPED = [
   "Kvu", // Possible typo in printed book. See notes
 ];
 const excluded = [...excludedDhammika, ...excludedDPPN, ...excludedCommentary, ...excludedPED, ...cannotFigureOutPED];
+
 let list = [];
 dictionary.forEach(item => {
   if (list.concat(item.text.match(regex)) != null) {
     list = list.concat(item.text.match(regex));
   }
 });
-
+console.log("All Citations")
+console.log(list)
 console.log("citations only");
 
 let cleanedList = [];

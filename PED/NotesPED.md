@@ -1,5 +1,15 @@
 # Major Issues
 
+# TODO
+
+- [ ] 
+
+
+## Vinaya
+
+Volume 3 is split between the Bhikkhu and Bhikkuni vibhanga, pli-tv-bu-vb and pli-tv-bu-vb.
+
+
 ## Dhammasaṅgaṇī (Ds)
 
 Aprox 1,741 citations. They range from 1 to 1,596. It appears that the PED is referencing the paragraph(??) numbers in the 1885 edition. They don't appear to be in the manuscript. They are close to msdiv but those numbers go up to 1616. And the pts 1599 == msdiv 1616.
@@ -33,7 +43,7 @@ Dhs.981
 Pp.19
 Ud.83
 
-^([A-Za-zāīūṭḍḷṁṇñṅ-]+).+$	
+	
 
 
 	
@@ -89,3 +99,6 @@ Dhp.458
 Dhp.679
 Dhp.687
 Dhp.1134
+
+
+^([A-Za-zāīūṭḍḷṁṇñṅ-]+).+$

@@ -6,7 +6,7 @@ decorated.forEach(item => {
   //
   // Volumes 3 and 4 do not track exactly to pli-tv-bu-vb and pli-tv-bu-vb
   // ??? Will we have to do this programatically???
-  ///
+  //
   item.text = item.text
     .replaceAll(
       /<span class='ref'>Vin\.i\.(\d+?)(.*?)<\/span>/g,
@@ -106,6 +106,7 @@ decorated.forEach(item => {
     "<a class='ref' data-division='/sutta/kn/dhp' data-reference='vnp.$1' data-url='/en/sujato'>Dhp.$1$2</a>"
   );
   // SUTTA NIPATA
+  // Snp.verseNumber
   item.text = item.text.replaceAll(
     /<span class='ref'>Snp\.(\d+?)(.*?)<\/span>/g,
     "<a class='ref' data-division='/sutta/kn/snp' data-reference='vnp.$1' data-url='/en/sujato'>Snp.$1$2</a>"
@@ -283,3 +284,39 @@ decorated.forEach(item => {
 });
 console.log("decorated code");
 console.log(decorated);
+
+
+const regex = new RegExp("<a class='ref'.*?>(.+?)</a>", "g");
+let list = [];
+dictionary.forEach(item => {
+  if (list.concat(item.text.match(regex)) != null) {
+    list = list.concat(item.text.match(regex));
+  }
+});
+console.log("just decorated citations")
+console.log(list)
+
+
+const regex1 = new RegExp("<a class='ref'.*?>");
+const regex2 = new RegExp("</a>");
+
+let cleanedList = [];
+list.forEach(item => {
+  if (item !== null) {
+    item = item.replace(regex1, "").replace(regex2, "");
+    cleanedList = cleanedList.concat(item);
+  }
+});
+
+console.log("decorated citations only")
+console.log(cleanedList)
+
+let cleanedListString = "";
+cleanedList.forEach(item => {
+  if (item.match(/^[A-Za-z-]+/)) {
+     cleanedListString = cleanedListString + item + "\n";
+   
+  }
+});
+console.log("string of decorated citations")
+console.log(cleanedListString);
