@@ -31,14 +31,14 @@ const excludedCommentary = [
 const excludedPED = [
   "Abhp",
   "Anvs",
-  "Asl",
+  "Asl", // possibly Aṭṭhasālinī??
   "Avs",
   "Bdhd",
   "Dhtm", // 130 citations Unsure what they are
   "Dhtp",
   "Divy", // Divyavadana
   "Dpvs",
-  "Duka-pa",
+  //"Duka-pa", // Dukapaṭṭhāna
   "Davs",
   "Ds", // citations are to paragraph numbers not in manuscript TODO
   "Jtm",
@@ -60,8 +60,6 @@ const excludedPED = [
   "Mvst",
 ];
 const cannotFigureOutPED = [
-  "Cnd",
-  "Mnd",
   "Dhvs", // only one
   "Dukp", // Only one
   "Kvn", // Possible typo in printed book. See notes
@@ -75,9 +73,8 @@ dictionary.forEach(item => {
     list = list.concat(item.text.match(regex));
   }
 });
-console.log("All Citations")
+console.log("All Citations not decorated")
 console.log(list)
-console.log("citations only");
 
 let cleanedList = [];
 list.forEach(item => {
@@ -86,11 +83,14 @@ list.forEach(item => {
     cleanedList = cleanedList.concat(item);
   }
 });
+console.log("citations only not decorated ");
 console.log(cleanedList);
+
+
 let cleanedListString = "";
 cleanedList.forEach(item => {
-  if (item.match(/^[A-Za-z-]+/)) {
-    const book = item.match(/^[A-Za-z-]+/).toString();
+  if (item.match(/^[A-Za-zāīūṭḍ-]+/)) {
+    const book = item.match(/^[A-Za-zāīūṭḍ-]+/).toString();
 
     if (book && !excluded.includes(book)) {
       cleanedListString = cleanedListString + item + "\n";

@@ -1,4 +1,3 @@
-
 AN.i.110
 AN.i.110<em>f.</em>
 AN.i.118<em>f.</em>
@@ -2760,6 +2759,7 @@ Snp.1011
 Snp.1011
 Snp.1011
 Snp.1011
+Snp.1011
 Snp.1011–1013
 Snp.1011–1013
 Snp.1011–1013
@@ -2805,6 +2805,8 @@ Snp.384
 Snp.404
 Snp.405
 Snp.405<em>ff.</em>
+Snp.422
+Snp.423
 Snp.423
 Snp.425<em>ff.</em>
 Snp.446<em>f.</em>
