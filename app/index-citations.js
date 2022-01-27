@@ -29,6 +29,8 @@ const excludedCommentary = [
   "Pp-a", "Bu-a", "Nid-a"
 ];
 const excludedPED = [
+  "Duka-pa", // Doesn't have PTS numbers in ms
+  "Tikp", // Doesn't have PTS numbers in ms
   "Abhp",
   "Anvs",
   "Asl", // possibly Aṭṭhasālinī??
@@ -38,7 +40,6 @@ const excludedPED = [
   "Dhtp",
   "Divy", // Divyavadana
   "Dpvs",
-  //"Duka-pa", // Dukapaṭṭhāna
   "Davs",
   "Ds", // citations are to paragraph numbers not in manuscript TODO
   "Jtm",
@@ -60,6 +61,7 @@ const excludedPED = [
   "Mvst",
 ];
 const cannotFigureOutPED = [
+  "Cnd", // numbers don't match anything in ms
   "Dhvs", // only one
   "Dukp", // Only one
   "Kvn", // Possible typo in printed book. See notes

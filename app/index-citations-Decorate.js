@@ -157,11 +157,11 @@ decorated.forEach(item => {
   // VIMANAVATTHU
   //
   // This code actually generates the final link. It also depends on the citation
-  //being strictly Vv.##.##. Nothing else will be found.
+  //being strictly Vv.ss.vv. Nothing else will be found. s=sutta v=verse
   //
   item.text = item.text.replaceAll(
     /<span class='ref'>Vv\.(\d+)\.(\d+)<\/span>/g,
-    "<a class='ref' href='https://suttacentral.net/vv$1/pli/ms#$2.1'>Vv.$1.$2</a>"
+    "<a class='ref' href='https://suttacentral.net/vv$1/pli/ms#$2.1'>Vv.$1:$2</a>"
   );
   // PETAVATTHU
   //
@@ -286,6 +286,15 @@ decorated.forEach(item => {
   );
   // SECOND WAY TO CREATE PETAVATTHU LINKS
   // This way relies on the citation being in roman numerals such as Vv.iii.4 for the 4th sutta in the 3rd chapter.
+
+// Cp
+item.text = item.text.replaceAll(
+  /<span class='ref'>Cp\.(\d+)#(\d+)<\/span>/g,
+  "<a class='ref' href='https://suttacentral.net/cp$1/pli/ms#$2.1'>Pv.$1.$2</a>"
+).replaceAll(
+  /<span class='ref'>Cp\.(\d+)<\/span>/g,
+  "<a class='ref' href='https://suttacentral.net/cp$1/pli/ms'>Pv.$1.</a>"
+);;
 
   // Paṭisambhidāmagga
   item.text = item.text

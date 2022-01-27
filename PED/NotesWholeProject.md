@@ -1,7 +1,7 @@
 Whole Project notes
 
 
-Sutta Nipāta
+# Sutta Nipāta
 
 Dhammika
 	to verses	60 times		
@@ -13,3 +13,4 @@ DPPN
 PED 
 	to verses	7784 times	Snp.77
 	to page		372 times	Snp.p.99
+
