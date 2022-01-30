@@ -166,12 +166,21 @@ decorated.forEach(item => {
   // PETAVATTHU
   //
   // This code actually generates the final link. It also depends on the citation
-  //being strictly Pv.##.##. Nothing else will be found.
+  //being strictly Pv.ss.vv. or Pv.ss or Pvss#vv Nothing else will be found. s=sutta v=verse
   //
   item.text = item.text.replaceAll(
     /<span class='ref'>Pv\.(\d+)\.(\d+)<\/span>/g,
-    "<a class='ref' href='https://suttacentral.net/pv$1/pli/ms#$2.1'>Pv.$1.$2</a>"
+    "<a class='ref' href='https://suttacentral.net/pv$1/pli/ms#$2.1'>Pv.$1:$2</a>"
+  ).replaceAll(
+    /<span class='ref'>Pv\.(\d+)#(\d+)<\/span>/g,
+    "<a class='ref' href='https://suttacentral.net/pv$1/pli/ms#$2.1'>Pv.$1:$2</a>"
+  ).replaceAll(
+    /<span class='ref'>Pv\.(\d+)<\/span>/g,
+    "<a class='ref' href='https://suttacentral.net/pv$1/pli/ms'>Pv.$1</a>"
   );
+
+
+
   // JATAKA
   item.text = item.text
     .replaceAll(
@@ -275,25 +284,14 @@ decorated.forEach(item => {
     /<span class='ref'>Vv\.(\d+)<\/span>/g,
     "<a class='ref' href='https://suttacentral.net/vv$1/pli/ms#$2.1'>Vv.$1:$2</a>"
   );;
-  // PETAVATTHU  SPECIAL FOR PED
-  //
-  // This code actually generates the final link. It also depends on the citation
-  //being strictly PV.dd#dd. Nothing else will be found.
-  //
-  item.text = item.text.replaceAll(
-    /<span class='ref'>Pv\.(\d+)#(\d+)<\/span>/g,
-    "<a class='ref' href='https://suttacentral.net/pv$1/pli/ms#$2.1'>Pv.$1.$2</a>"
-  );
-  // SECOND WAY TO CREATE PETAVATTHU LINKS
-  // This way relies on the citation being in roman numerals such as Vv.iii.4 for the 4th sutta in the 3rd chapter.
 
 // Cp
 item.text = item.text.replaceAll(
   /<span class='ref'>Cp\.(\d+)#(\d+)<\/span>/g,
-  "<a class='ref' href='https://suttacentral.net/cp$1/pli/ms#$2.1'>Pv.$1.$2</a>"
+  "<a class='ref' href='https://suttacentral.net/cp$1/pli/ms#$2.1'>Cp.$1.$2</a>"
 ).replaceAll(
   /<span class='ref'>Cp\.(\d+)<\/span>/g,
-  "<a class='ref' href='https://suttacentral.net/cp$1/pli/ms'>Pv.$1.</a>"
+  "<a class='ref' href='https://suttacentral.net/cp$1/pli/ms'>Cp.$1.</a>"
 );;
 
   // Paṭisambhidāmagga

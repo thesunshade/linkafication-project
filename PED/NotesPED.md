@@ -6,10 +6,7 @@
 - [ ] Cnd
 - [ ] Snp
 
-## Pv
-Pv.iii.9#1 is to Pv chapter 3 sutta 9 verse 1
-Pv.iii.5#10 is to Pv chapter 3 sutta 5 verse 11 So it is off by one
-Pv.iii.6#14 is to Pv chapter 3 sutta 6 verse 15 So it is off by one (and ms version is different than the PTS edition)
+
 
 ## Khp
 
@@ -18,19 +15,7 @@ Citations have been changed to Khp in the json where I could confirm they are re
 # Thag
 There is a single citation to Thag p.1, probably because it's in the preliminary verse
 
-## Mnd
 
-Mnd citations seem to all be to the page number in the Pali edition. The only exception are the below citations that are either out of range, or in one case, not there. 
-
-
-* Mnd.512
-* Mnd.550
-* Mnd.553
-* Mnd.558
-* Mnd.581 (vipula) not a typo in PED, can't find in book
-* Mnd.611
-* Mnd.616 (saṅkappa) not a typo in PED, can't find in book
-* Mnd.342#1b (pavivitta) not a typo in PED, can't find in book
 
 ## Cnd
 
@@ -67,17 +52,6 @@ In PED only. There are 97 Tikp (ranging from 1–366) and 14 Duka-pa (ranging fr
 
 -------------------
 
-Pp.83 doesn't seem to exist. Check scan "word": "parinibbāyin",
-
-
-
-Kp.viii.1 seems to be Khp8 verse 1
-However many Kp seem to be part of a list where it starts with Tikp
-
-
-Pv citations are in the form of roman numerals for chapters and then sutta in chapter. However on SC they are numbered consecutively.
-
-
 Sdhp.239 these are well formed but the book abbreviation doesn't exist. 1414 of them
 Dhtm.322 these are well formed but the book abbreviation doesn't exist. 130 of them
 Vb.54 these are well formed but the book abbreviation doesn't exist. 1218 of them
@@ -92,6 +66,8 @@ Tha-ap has 1-333 plus Tha-ap.v.3, Tha-ap.v.8
 
 Word in parentheses is where it is found
 
+Ap.v.16 (divā) divākara?
+Ap.v.45 (vaṭṭi)
 Cp.v.68 (sallīna)
 Cp.vi.7 (bahu, bahumata)
 Cp.vi.8 (brūti)
@@ -109,17 +85,50 @@ Pv.3 (paribhuñjati)
 Pv.47 (paribhuñjati)
 Pv.5 (paribhuñjati)
 Pv.8 (paribhuñjati)
+Note Mnd in print book is Nd1
+Mnd.512 (viraddha)
+Mnd.550 (loka)
+Mnd.553 (vaco)
+Mnd.558 (abbhokāsika)
+Mnd.581 (vipula) 
+Mnd.611 (vusitavant)
+Mnd.616 (saṅkappa) 
+Mnd.342#1b (pavivitta) 
+DhS.1003 (sakkāya)
+DhS.629 (kasāya) (kasāva) twice
+Pp.83 (parinibbāyin)
+Kh.136 (kammanta)
+Kh.207 (kamma)
+Kh.21 (kabba)
 
+# Not possible because volume/verse doesn't exist
+
+DN.iv.302 (cakka)
+DN.v.31 (chādeti)
+DN.v.33 (chādeti)
+DN.v.342 (cakka)
+DN.v.44 (cakka)
+DN.v.463 (chādeti)
+DN.v.99 (cakka)
+SN.vi.198 (vattar)
+SN.vi.226 (chindati)
+SN.vi.93 (vimutta)
+SN.vi.94 (vattar)
+Dhp.458 (paduma)
+Dhp.679 (r)
+Dhp.687 (r)
+Dhp.1134 (r)
 
 Dhvs 9, 1 (sīhaḷa) 
 Dukp.26 (samanantara)
-Kh.21 (kabba)
-Kh.136 (kammanta) 
-Kh.207 (kamma)
 Khus.114 (kaya)
 Kvn (kamma)
 Kvu.viii.9 (cetanā) in the text it is actually written KV. Kv citaions have no volume
 MBh.i.190 & MBh.i.47 (bhaggava) 
+Mbh 1, 78 (lekhaṇī)
+Mbh 2, 1310 (vitaṇḍā)
+Mbh 3, 1831 (lekhā)
+Mbh 7, 3022 (vitaṇḍā)
 Mbhv Could be a typo in the print edition for Mhbv
 Mbvs Could be a typo in the print edition for Mhbv
 Mvst.ii.444 (upadhi, maybe Mvu)
@@ -134,26 +143,6 @@ Shhp.55 (kāyika)
 Shhp.104 (vali, valī)
 	
 
-# Not possible
-
-DN.iv.302
-DN.v.31
-DN.v.33
-DN.v.342
-DN.v.44
-DN.v.463
-DN.v.99
-SN.vi.198
-SN.vi.226
-SN.vi.62
-SN.vi.93
-SN.vi.94
-
-not possible as verses:
-Dhp.458
-Dhp.679
-Dhp.687
-Dhp.1134
 
 
 Tha-ap.1
@@ -244,3 +233,8 @@ Tha-ap.v.8
 
 
 ^([A-Za-zāīūṭḍḷṁṇñṅ-]+).+$
+
+
+
+\((.+)\)
+([\1](https://suttacentral.net/define/\1))
