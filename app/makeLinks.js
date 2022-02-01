@@ -1,20 +1,33 @@
 import { decoratedDictionary } from "./decoratedDictionary.js";
-import { dnIds } from "./dnIds.js";
-import { mnIds } from "./mnIds.js";
-import { snIds } from "./snIds.js";
-import { anIds } from "./anIds.js";
-import { dhpIds } from "./dhpIds.js";
-import { snpIds } from "./snpIds.js";
-import { thagIds } from "./thagIds.js";
-import { thigIds } from "./thigIds.js";
-import { jaIds } from "./jaIds.js";
-import { milIds } from "./milIds.js";
-import { vinIds } from "./vinIds.js";
+import { dnIds } from "./refs/dnIds.js";
+import { mnIds } from "./refs/mnIds.js";
+import { snIds } from "./refs/snIds.js";
+import { anIds } from "./refs/anIds.js";
+import { dhpIds } from "./refs/dhpIds.js";
+import { udIds } from "./refs/udIds.js";
+import { itiIds } from "./refs/itiIds.js";
+import { snpIds } from "./refs/snpIds.js";
+import { vvIds } from "./refs/vvIds.js";
+import { pvIds } from "./refs/pvIds.js";
+import { thagIds } from "./refs/thagIds.js";
+import { thigIds } from "./refs/thigIds.js";
+import { jaIds } from "./refs/jaIds.js";
+import { bvIds } from "./refs/bvIds.js";
+import { milIds } from "./refs/milIds.js";
+import { mndIds } from "./refs/mndIds.js";
+import { neIds } from "./refs/neIds.js";
+import { peIds } from "./refs/peIds.js";
+import { psIds } from "./refs/psIds.js";
+import { vbIds } from "./refs/vbIds.js";
+import { ppIds } from "./refs/ppIds.js";
+import { kvIds } from "./refs/kvIds.js";
+import { vinIds } from "./refs/vinIds.js";
 
 let linked = [...decoratedDictionary];
 
 const regex = new RegExp("<a class='ref' data-division='(.+?)' data-reference='(.+?)' data-url='(.+?)'>(.+?)</a>", "g");
 
+var start = Date.now();
 linked.forEach(entry => {
   let array = [...entry.text.matchAll(regex)];
   array.forEach(item => {
@@ -47,7 +60,14 @@ linked.forEach(entry => {
       }
     } else if (item[1] === "/sutta/an") {
       for (const [key, value] of Object.entries(anIds)) {
-        if (value.split(", ").includes(item[2])) {
+        if (
+          value.split(", ").includes(item[2]) |
+          value.split(", ").includes(item[2] + ".1") |
+          value.split(", ").includes(item[2] + ".2") |
+          value.split(", ").includes(item[2] + ".3") |
+          value.split(", ").includes(item[2] + ".4") |
+          value.split(", ").includes(item[2] + ".5")
+        ) {
           const parts = key.split(":");
           const link = `<a class='ref' href='https://suttacentral.net/${parts[0]}${item[3]}#${parts[1]}'>${item[4]}</a>`;
           entry.text = entry.text.replace(item[0], link);
@@ -63,8 +83,44 @@ linked.forEach(entry => {
           break;
         }
       }
+    } else if (item[1] === "/sutta/kn/ud") {
+      for (const [key, value] of Object.entries(udIds)) {
+        if (value.split(", ").includes(item[2])) {
+          const parts = key.split(":");
+          const link = `<a class='ref' href='https://suttacentral.net/${parts[0]}${item[3]}#${parts[1]}'>${item[4]}</a>`;
+          entry.text = entry.text.replace(item[0], link);
+          break;
+        }
+      }
+    } else if (item[1] === "/sutta/kn/iti") {
+      for (const [key, value] of Object.entries(itiIds)) {
+        if (value.split(", ").includes(item[2])) {
+          const parts = key.split(":");
+          const link = `<a class='ref' href='https://suttacentral.net/${parts[0]}${item[3]}#${parts[1]}'>${item[4]}</a>`;
+          entry.text = entry.text.replace(item[0], link);
+          break;
+        }
+      }
     } else if (item[1] === "/sutta/kn/snp") {
       for (const [key, value] of Object.entries(snpIds)) {
+        if (value.split(", ").includes(item[2])) {
+          const parts = key.split(":");
+          const link = `<a class='ref' href='https://suttacentral.net/${parts[0]}${item[3]}#${parts[1]}'>${item[4]}</a>`;
+          entry.text = entry.text.replace(item[0], link);
+          break;
+        }
+      }
+    } else if (item[1] === "/sutta/kn/vv") {
+      for (const [key, value] of Object.entries(vvIds)) {
+        if (value.split(", ").includes(item[2])) {
+          const parts = key.split(":");
+          const link = `<a class='ref' href='https://suttacentral.net/${parts[0]}${item[3]}#${parts[1]}'>${item[4]}</a>`;
+          entry.text = entry.text.replace(item[0], link);
+          break;
+        }
+      }
+    } else if (item[1] === "/sutta/kn/pv") {
+      for (const [key, value] of Object.entries(pvIds)) {
         if (value.split(", ").includes(item[2])) {
           const parts = key.split(":");
           const link = `<a class='ref' href='https://suttacentral.net/${parts[0]}${item[3]}#${parts[1]}'>${item[4]}</a>`;
@@ -99,8 +155,80 @@ linked.forEach(entry => {
           break;
         }
       }
+    } else if (item[1] === "/sutta/kn/bv") {
+      for (const [key, value] of Object.entries(bvIds)) {
+        if (value.split(", ").includes(item[2])) {
+          const parts = key.split(":");
+          const link = `<a class='ref' href='https://suttacentral.net/${parts[0]}${item[3]}#${parts[1]}'>${item[4]}</a>`;
+          entry.text = entry.text.replace(item[0], link);
+          break;
+        }
+      }
     } else if (item[1] === "/sutta/kn/mil") {
       for (const [key, value] of Object.entries(milIds)) {
+        if (value.split(", ").includes(item[2])) {
+          const parts = key.split(":");
+          const link = `<a class='ref' href='https://suttacentral.net/${parts[0]}${item[3]}#${parts[1]}'>${item[4]}</a>`;
+          entry.text = entry.text.replace(item[0], link);
+          break;
+        }
+      }
+    } else if (item[1] === "/sutta/kn/mnd") {
+      for (const [key, value] of Object.entries(mndIds)) {
+        if (value.split(", ").includes(item[2])) {
+          const parts = key.split(":");
+          const link = `<a class='ref' href='https://suttacentral.net/${parts[0]}${item[3]}#${parts[1]}'>${item[4]}</a>`;
+          entry.text = entry.text.replace(item[0], link);
+          break;
+        }
+      }
+    } else if (item[1] === "/sutta/kn/pe") {
+      for (const [key, value] of Object.entries(peIds)) {
+        if (value.split(", ").includes(item[2])) {
+          const parts = key.split(":");
+          const link = `<a class='ref' href='https://suttacentral.net/${parts[0]}${item[3]}#${parts[1]}'>${item[4]}</a>`;
+          entry.text = entry.text.replace(item[0], link);
+          break;
+        }
+      }
+    } else if (item[1] === "/sutta/kn/ne") {
+      for (const [key, value] of Object.entries(neIds)) {
+        if (value.split(", ").includes(item[2])) {
+          const parts = key.split(":");
+          const link = `<a class='ref' href='https://suttacentral.net/${parts[0]}${item[3]}#${parts[1]}'>${item[4]}</a>`;
+          entry.text = entry.text.replace(item[0], link);
+          break;
+        }
+      }
+    } else if (item[1] === "/sutta/kn/ps") {
+      for (const [key, value] of Object.entries(psIds)) {
+        if (value.split(", ").includes(item[2])) {
+          const parts = key.split(":");
+          const link = `<a class='ref' href='https://suttacentral.net/${parts[0]}${item[3]}#${parts[1]}'>${item[4]}</a>`;
+          entry.text = entry.text.replace(item[0], link);
+          break;
+        }
+      }
+    } else if (item[1] === "/abhidhamma/pli-tv-ab/vb") {
+      for (const [key, value] of Object.entries(vbIds)) {
+        if (value.split(", ").includes(item[2])) {
+          const parts = key.split(":");
+          const link = `<a class='ref' href='https://suttacentral.net/${parts[0]}${item[3]}#${parts[1]}'>${item[4]}</a>`;
+          entry.text = entry.text.replace(item[0], link);
+          break;
+        }
+      }
+    } else if (item[1] === "/abhidhamma/pli-tv-ab/kv") {
+      for (const [key, value] of Object.entries(kvIds)) {
+        if (value.split(", ").includes(item[2])) {
+          const parts = key.split(":");
+          const link = `<a class='ref' href='https://suttacentral.net/${parts[0]}${item[3]}#${parts[1]}'>${item[4]}</a>`;
+          entry.text = entry.text.replace(item[0], link);
+          break;
+        }
+      }
+    } else if (item[1] === "/abhidhamma/pli-tv-ab/pp") {
+      for (const [key, value] of Object.entries(ppIds)) {
         if (value.split(", ").includes(item[2])) {
           const parts = key.split(":");
           const link = `<a class='ref' href='https://suttacentral.net/${parts[0]}${item[3]}#${parts[1]}'>${item[4]}</a>`;
@@ -121,3 +249,42 @@ linked.forEach(entry => {
   });
 });
 console.log(linked);
+var end = Date.now();
+console.log(`Execution time: ${(end - start) / 1000} seconds`);
+
+// not linked up
+const regexunlinked = new RegExp("<a class='ref' data-division=(.+?)</a>", "g");
+let list = [];
+linked.forEach(item => {
+  if (list.concat(item.text.match(regexunlinked)) != null) {
+    list = list.concat(item.text.match(regexunlinked));
+  }
+});
+console.log("All Citations not linkedup");
+console.log(list);
+
+//<a class='ref' data-division='/sutta/dn' data-reference='pts-vp-pli3.351' data-url='/en/sujato'>DN.iii.351</a>
+const regex1 = new RegExp("<a class='ref' data-division=.+?>");
+const regex2 = new RegExp("</a>");
+let cleanedList = [];
+list.forEach(item => {
+  if (item !== null) {
+    item = item.replace(regex1, "").replace(regex2, "");
+    cleanedList = cleanedList.concat(item);
+  }
+});
+console.log("citations only not decorated ");
+// console.log(cleanedList);
+
+const excluded = ["Ja"];
+let cleanedListString = "";
+cleanedList.forEach(item => {
+  if (item.match(/^[A-Za-zāīūṭḍ-]+/)) {
+    const book = item.match(/^[A-Za-zāīūṭḍ-]+/).toString();
+
+    if (book && !excluded.includes(book)) {
+      cleanedListString = cleanedListString + item + "\n";
+    }
+  }
+});
+console.log(cleanedListString);
