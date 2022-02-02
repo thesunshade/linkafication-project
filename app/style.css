@@ -1,0 +1,44 @@
+body {
+  background-color: aquamarine;
+}
+
+.control-area {
+  display: flex;
+  flex-direction: row;
+}
+
+#decorate-area {
+  border: solid;
+  width: 15rem;
+  margin-right: 1rem;
+  padding: 1rem;
+  background-color: white;
+}
+
+#decorated-dictionary-box {
+  height: 10rem;
+  width: 14rem;
+  font-size: 0.5rem;
+  overflow: hidden;
+  padding: 0.5rem;
+  border: solid 1px;
+  white-space: pre;
+}
+
+/* .bottom_fade {
+  width: 15rem;
+  height: 5rem;
+  z-index: 99;
+  position: relative;
+  bottom: 5rem;
+  background: url("./bottom-fade.png") bottom center no-repeat;
+} */
+
+#results-area {
+  border: solid;
+  padding: 1rem;
+}
+
+.hidden {
+  display: none;
+}

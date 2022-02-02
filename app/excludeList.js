@@ -1,8 +1,3 @@
-import { dictionary } from "./dictionary.js";
-
-const regex = new RegExp("<span class='ref'>(.+?)</span>", "g");
-const regex1 = new RegExp("<span class='ref'>");
-const regex2 = new RegExp("</span>");
 const excludedDhammika = ["Bcv", "Jm", "Vism", "Bc", "Mvu"];
 const excludedDPPN = ["CAGI", "Cyp", "DhSA", "Dpv", "Mbv", "MT", "Sp", "Mhv"];
 const excludedCommentary = [
@@ -26,7 +21,9 @@ const excludedCommentary = [
   "Kvu-a",
   "Ne-a",
   "Dhs-a",
-  "Pp-a", "Bu-a", "Nid-a"
+  "Pp-a",
+  "Bu-a",
+  "Nid-a",
 ];
 const excludedPED = [
   "Duka-pa", // Doesn't have PTS numbers in ms
@@ -67,36 +64,10 @@ const cannotFigureOutPED = [
   "Kvn", // Possible typo in printed book. See notes
   "Kvu", // Possible typo in printed book. See notes
 ];
-const excluded = [...excludedDhammika, ...excludedDPPN, ...excludedCommentary, ...excludedPED, ...cannotFigureOutPED];
-
-let list = [];
-dictionary.forEach(item => {
-  if (list.concat(item.text.match(regex)) != null) {
-    list = list.concat(item.text.match(regex));
-  }
-});
-console.log("All Citations not decorated")
-console.log(list)
-
-let cleanedList = [];
-list.forEach(item => {
-  if (item !== null) {
-    item = item.replace(regex1, "").replace(regex2, "");
-    cleanedList = cleanedList.concat(item);
-  }
-});
-console.log("citations only not decorated ");
-console.log(cleanedList);
-
-
-let cleanedListString = "";
-cleanedList.forEach(item => {
-  if (item.match(/^[A-Za-zāīūṭḍ-]+/)) {
-    const book = item.match(/^[A-Za-zāīūṭḍ-]+/).toString();
-
-    if (book && !excluded.includes(book)) {
-      cleanedListString = cleanedListString + item + "\n";
-    }
-  }
-});
-console.log(cleanedListString);
+export const excluded = [
+  ...excludedDhammika,
+  ...excludedDPPN,
+  ...excludedCommentary,
+  ...excludedPED,
+  ...cannotFigureOutPED,
+];

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>✨Decorate</title>
+    <link rel="stylesheet" href="./style.css" />
+</head>
+
+<body>
+
+    <div class="content">
+        <div class="control-area">
+            <div id="decorate-area">
+                <p>Processing <span id="current-dictionary-name"></span></p>
+                <button id="decorate">Decorate</button>
+                <div id="message"></div>
+                <textarea id="decorated-dictionary-box"></textarea>
+
+                <button id="copy-decorated-dictionary" class="btn">Copy Decorated dictionary to Clipboard</button>
+            </div>
+            <div id="results-area" class="hidden">
+                <button id="make-decorated-lists">Make decorated lists</button>
+                <div id="list-message"></div>
+                <button id="copy-decorated-list-citations">Copy Decorated citations to Clipboard</button>
+                <button id="link-all-things">Link it all up</button>
+                <div id="link-message"></div>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="./index-citations-Decorate.js"></script>
+
+
+</body>
+
+</html>

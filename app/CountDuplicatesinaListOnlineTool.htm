@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html class="no-js rnjkn idc0_335" lang="en">
+
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<title>Count Duplicates in a List Online Tool</title>
+	<script data-ad-client="ca-pub-2379876391548301" async=""
+		src="CountDuplicatesinaListOnlineTool_files/adsbygoogle.js"></script>
+	<meta name="description" content="Count Duplicates in a List Online Tool">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<style>
+		body {
+			font-family: "Arial", sans-serif;
+			line-height: 1.6;
+			color: #333333;
+			background-color: white;
+		}
+
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6 {
+			line-height: 1.2;
+		}
+
+		p {
+			text-align: justify;
+		}
+
+		p.description {
+			font-weight: bold;
+		}
+
+		div.flink a {
+			padding: 0px 0.3ex 0px 0.3ex;
+			line-height: 2;
+		}
+
+		@media screen {
+			#tagline {
+				font-size: 0.8em;
+				border-bottom: 1px solid gray;
+				letter-spacing: 1px;
+			}
+
+			body {
+				margin: 0;
+			}
+
+			h1 {
+				color: #434300;
+				background-color: white;
+				margin: 0px;
+				padding: 0px;
+			}
+
+			h2 {
+				color: #004343;
+				background-color: white;
+			}
+
+			h3 {
+				color: #430043;
+				background-color: white;
+			}
+
+			p.description:first-letter {
+				font-size: 2em;
+				text-transform: uppercase;
+				margin-top: -0.25em;
+				float: left;
+				color: #993300;
+				background-color: white;
+				margin-right: 0.75ex;
+				font-family: "Monotype Corsiva", cursive;
+				font-weight: bold;
+			}
+
+			a.bc {
+				letter-spacing: 0.15ex;
+			}
+
+			div.content {
+				max-width: 40em;
+				margin: 0px auto;
+				border-left: 0.25em outset #CCCCCC;
+				border-right: 0.25em outset #CCCCCC;
+				padding: 0.1em 5% 1.5em 5%;
+				color: black;
+				background-color: white;
+			}
+
+			div.content pre {
+				white-space: pre-wrap;
+				word-wrap: break-word;
+				overflow: auto;
+			}
+		}
+
+		@media print {
+			.noprint {
+				display: none;
+				visibility: hidden;
+			}
+
+			a {
+				color: black;
+				background-color: white;
+			}
+		}
+	</style>
+	<link rel="alternate" type="application/rss+xml" title="Somacon" href="https://www.somacon.com/p998.php">
+	<script>
+		var objCountsPlaceholder = null;
+		function updateCounts() {
+			// Global
+			objCountsPlaceholder = document.getElementById('CountsPlaceholder');
+
+			// Get references to form elements
+			var formObj = document.forms['lineCounts'];
+			var textInput = formObj.elements['textInput'];
+
+			// Parse the output options
+			// Index 0 is the count, 1 is the line
+			var sortByIndex = 0;
+			if (document.getElementById('sortby_line').checked) {
+				sortByIndex = 1;
+			}
+			var formatSelection = 'readable';
+			if (document.getElementById('format_csv').checked) {
+				formatSelection = 'csv';
+			}
+			var includeCounts = true;
+			if (document.getElementById('counts_visibility_hide').checked) {
+				includeCounts = false;
+			}
+			var minimumCount = 1;
+			if (document.getElementById('values_visibility_duplicates').checked) {
+				minimumCount = 2;
+			}
+
+			// Set up for processing
+			inputString = new String(textInput.value);
+			var arrLines = inputString.split("\n");
+			var countLines = arrLines.length;
+			var arrUniqueLines = [];
+
+			// Loop through lines and accumulate counts
+			for (var i = 0; i < countLines; i++) {
+				// Ignore trailing new-line (if there is one)
+				var currentLine = arrLines[i];
+				if (currentLine.substr(currentLine.length - 2, 2) == "\r\n") {
+					currentLine = currentLine.substr(0, currentLine.length - 2);
+				}
+				if (currentLine.substr(currentLine.length - 1, 1) == "\n" ||
+					currentLine.substr(currentLine.length - 1, 1) == "\r") {
+					currentLine = currentLine.substr(0, currentLine.length - 1);
+				}
+
+				// Count the lines
+				if (!arrUniqueLines[currentLine]) {
+					arrUniqueLines[currentLine] = 1;
+				} else {
+					arrUniqueLines[currentLine] += 1;
+				}
+			}
+
+			// Delete the counts from previous run
+			if (objCountsPlaceholder.hasChildNodes()) {
+				while (objCountsPlaceholder.childNodes.length >= 1) {
+					objCountsPlaceholder.removeChild(objCountsPlaceholder.firstChild);
+				}
+			}
+
+			// Write the header line
+			if (formatSelection == 'csv') {
+				if (includeCounts == true) {
+					AppendLine("COUNT,LINE");
+				}
+				else {
+					AppendLine("LINE");
+				}
+			}
+			else {
+				if (includeCounts == true) {
+					AppendLine("COUNT    | LINE");
+				}
+				else {
+					AppendLine("LINE");
+				}
+				AppendLine("-----------------------------------------------------");
+			}
+
+			// Insert [count,value] into a new array for sorting
+			var sortedLines = [];
+			for (var i in arrUniqueLines) {
+				// Skip lines with too few occurrences
+				if (arrUniqueLines[i] < minimumCount) {
+					continue;
+				}
+				sortedLines.push([arrUniqueLines[i], i]);
+			}
+
+			// Clear the original array
+			arrUniqueLines = null;
+
+			// Reverse sort by count
+			sortedLines.sort(function (a, b) {
+				if (sortByIndex == 0) {
+					// Sort by count
+					return (b[0] - a[0] != 0 ? b[0] - a[0] : a[1].localeCompare(b[1]));
+				}
+				else {
+					// Sort by line value
+					return (a[1].localeCompare(b[1]) != 0 ? a[1].localeCompare(b[1]) : b[0] - a[0]);
+				}
+			});
+
+			// Print the line counts
+			for (var i in sortedLines) {
+				if (formatSelection == 'csv') {
+					AppendLine((includeCounts ? sortedLines[i][0] + ',' : '') + '"' + sortedLines[i][1].replace('"', '""') + '"');
+				}
+				else {
+					strToPrint = '';
+					if (includeCounts == true) {
+						strToPrint = '' + zeroPad(sortedLines[i][0], 8, " ") + ' | ';
+					}
+					strToPrint += sortedLines[i][1] + '';
+					AppendLine(strToPrint);
+				}
+			}
+
+			// Determine distinct line label
+			var distinctLinesLabel = (minimumCount == 1 ? "DISTINCT" : "DISTINCT DUPLICATE");
+
+
+			// Print total character count
+			if (formatSelection == 'csv') {
+				AppendLine(countLines + ",TOTAL LINES");
+				AppendLine(sortedLines.length + "," + distinctLinesLabel + " LINES");
+			}
+			else {
+				AppendLine("-----------------------------------------------------");
+				AppendLine(zeroPad(countLines, 8, " ") + " | TOTAL LINES");
+				AppendLine(zeroPad(sortedLines.length, 8, " ") + " | " + distinctLinesLabel + " LINES");
+			}
+
+			return false;
+		}
+
+		// n = number you want padded
+		// digits = length you want the final output
+		function zeroPad(n, digits, padChar) {
+			n = n.toString();
+			while (n.length < digits) {
+				n = padChar + n;
+			}
+			return n;
+		}
+		function AppendLine(str) {
+			objCountsPlaceholder.appendChild(document.createTextNode(str + "\n"));
+		}
+
+
+	</script>
+	<style>
+		pre {
+			margin: 0;
+			padding: 0;
+		}
+
+		label {
+			border: 1px solid darkgrey;
+			border-radius: 3px;
+			padding: 0.3em 0.6em;
+		}
+
+		button {
+			padding: 0.3em 0.6em;
+			font-size: 1em;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="content">
+		<h3>Count Duplicates in a List Online Tool</h3>
+
+
+		<form method="get" action="#" onsubmit="return false;" name="lineCounts">
+
+			<h5>Paste Text Below</h5>
+			<textarea name="textInput" rows="10" cols="80"></textarea>
+
+			<fieldset>
+				<legend>Output Options</legend>
+				<div style="text-align:center;">
+					Sort By:
+
+					<label for="sortby_count"><input type="radio" name="sortby" value="count" checked="checked"
+							id="sortby_count"> Count</label>
+
+					<label for="sortby_line"><input type="radio" name="sortby" value="line" id="sortby_line">
+						Line</label>
+
+					Format:
+
+					<label for="format_readable"><input type="radio" name="format" value="readable" checked="checked"
+							id="format_readable"> Readable</label>
+
+					<label for="format_csv"><input type="radio" name="format" value="csv" id="format_csv"> CSV</label>
+				</div>
+
+				<div style="margin-top:1em;text-align:center;">
+					Counts Column:
+
+					<label for="counts_visibility_show"><input type="radio" name="counts_visibility" value="show"
+							checked="checked" id="counts_visibility_show"> Show</label>
+
+					<label for="counts_visibility_hide"><input type="radio" name="counts_visibility" value="hide"
+							id="counts_visibility_hide"> Hide</label>
+
+					Values:
+
+					<label for="values_visibility_all"><input type="radio" name="values_visibility" value="all"
+							checked="checked" id="values_visibility_all"> All</label>
+
+					<label for="values_visibility_duplicates"><input type="radio" name="values_visibility"
+							value="duplicates" id="values_visibility_duplicates"> Duplicates Only</label>
+				</div>
+
+				<div style="margin-top:1.33em;text-align:center;">
+					<button onclick="return updateCounts();" style="margin-right:1em;">Display/Update Counts</button>
+
+					<button class="CopyClipboardButton" data-clipboard-target="#CountsPlaceholder">
+						<img src="CountDuplicatesinaListOnlineTool_files/clippy.svg" alt="Copy Icon"> Copy Results to
+						Clipboard
+					</button>
+
+				</div>
+
+			</fieldset>
+
+			<h2>Counts / Results</h2>
+
+			<pre id="CountsPlaceholder"
+				style="margin-top: 1em;">counts will appear here after you click the button above</pre>
+
+
+		</form>
+
+
+
+		<h2>Related Tools</h2>
+
+		<ul>
+			<li><a href="https://www.somacon.com/p525.php">Javascript Count Character Occurrences Online</a></li>
+		</ul>
+
+
+		<!-- ClipboardJS initialization -->
+		<script src="CountDuplicatesinaListOnlineTool_files/clipboard.js"></script>
+		<script>
+			new ClipboardJS('.CopyClipboardButton');
+		</script>
+
+		<hr style="border: 1px solid rgb(128, 128, 128);margin-top:0.3em;margin-bottom:0.4em;">
+		<div class="noprint flink"><a href="https://www.somacon.com/" rel="nofollow">Home</a> · <a
+				href="https://www.somacon.com/p2.php?subject=Count+Duplicates+in+a+List+Online+Tool"
+				rel="nofollow">Contact</a> · <a href="https://www.somacon.com/p378.php" rel="nofollow">Search</a> · <a
+				href="javascript:window.print();" rel="nofollow">Print</a> · <a rel="nofollow"
+				href="https://twitter.com/share?original_referer=http%3A%2F%2Fwww.somacon.com%2Fp568.php&amp;source=tweetbutton&amp;text=Count+Duplicates+in+a+List+Online+Tool&amp;url=http%3A%2F%2Fwww.somacon.com%2Fp568.php">Tweet</a>
+		</div>
+		<div style="margin-top:0.3em;"><small><i>Created 2011-03-11, Last Modified 2022-01-14, © Shailesh N.
+					Humbad</i><br>Disclaimer: This content is provided as-is. The information may be incorrect.</small>
+		</div>
+	</div>
+
+
+</body>
+
+</html>

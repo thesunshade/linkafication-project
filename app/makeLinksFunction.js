@@ -1,4 +1,5 @@
 //import { decoratedDictionary } from "./decoratedDictionary.js";
+import countUniqueItems from "./countUniqueItems.js";
 import { dnIds } from "./refs/dnIds.js";
 import { mnIds } from "./refs/mnIds.js";
 import { snIds } from "./refs/snIds.js";
@@ -276,7 +277,7 @@ export default function linkDecorated(decoratedDictionary) {
       cleanedList = cleanedList.concat(item);
     }
   });
-
+  console.log(countUniqueItems(cleanedList, true));
   // console.log(cleanedList);
 
   const excluded = ["Ja"];
