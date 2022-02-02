@@ -1,6 +1,6 @@
 # Links made through decoration process
 <details><summary>Show full list</summary>
-~~~html
+```html
 <a class='ref' href='https://suttacentral.net/ud1.1/en/sujato'>Ud.1.1</a>
 <a class='ref' href='https://suttacentral.net/ud1.10/en/sujato'>Ud.1.10</a>
 <a class='ref' href='https://suttacentral.net/ud1.2/en/sujato'>Ud.1.2</a>
@@ -75,12 +75,12 @@
 <a class='ref' href='https://suttacentral.net/ud8.8/en/sujato'>Ud.8.8</a>
 <a class='ref' href='https://suttacentral.net/ud8.9/en/sujato'>Ud.8.9</a>
 <a class='ref' href='https://suttacentral.net/ud8.9/en/sujato'>Ud.8.9</a>
-~~~
+```
 </details>
 
 # List of all decorated citations
 <details><summary>Show full list</summary>
-~~~html
+```html
 <a class='ref' data-division='/sutta/an' data-reference='pts-vp-pli1.110' data-url='/en/sujato'>AN.i.110</a>
 <a class='ref' data-division='/sutta/an' data-reference='pts-vp-pli1.110' data-url='/en/sujato'>AN.i.110<em>f.</em></a>
 <a class='ref' data-division='/sutta/an' data-reference='pts-vp-pli1.118' data-url='/en/sujato'>AN.i.118<em>f.</em></a>
@@ -4090,5 +4090,5 @@
 <a class='ref' href='https://suttacentral.net/ud8.8/en/sujato'>Ud.8.8</a>
 <a class='ref' href='https://suttacentral.net/ud8.9/en/sujato'>Ud.8.9</a>
 <a class='ref' href='https://suttacentral.net/ud8.9/en/sujato'>Ud.8.9</a>
-~~~
+```
 </details>
