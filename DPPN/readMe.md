@@ -1,6 +1,8 @@
 # Results of DPPN Decoration
 
 # All decorated citations
+These are the citations that had decorations added *or* were made into final links
+<details><summary>Show full list</summary>
 ```
 AN.i.110
 AN.i.110<em>f.</em>
@@ -4012,3 +4014,4 @@ Vin.v.2
 Vin.v.3
 Vin.v.3
 ```
+</details>
