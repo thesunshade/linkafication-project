@@ -1,5 +1,6 @@
 # Links made through decoration process
 <details><summary>Show full list</summary>
+
 ```html
 <a class='ref' href='https://suttacentral.net/ud1.1/en/sujato'>Ud.1.1</a>
 <a class='ref' href='https://suttacentral.net/ud1.10/en/sujato'>Ud.1.10</a>
@@ -80,6 +81,7 @@
 
 # List of all decorated citations
 <details><summary>Show full list</summary>
+
 ```html
 <a class='ref' data-division='/sutta/an' data-reference='pts-vp-pli1.110' data-url='/en/sujato'>AN.i.110</a>
 <a class='ref' data-division='/sutta/an' data-reference='pts-vp-pli1.110' data-url='/en/sujato'>AN.i.110<em>f.</em></a>
