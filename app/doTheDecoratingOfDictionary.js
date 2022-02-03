@@ -117,9 +117,7 @@ export default function doTheDecoratingOfDictionary(dictionary) {
     // DHAMMAPADA
     item.text = item.text.replaceAll(
       /<span class='ref'>Dhp\.(\d+)(.*?)<\/span>/g,
-      "<a class='ref' data-division='/sutta/kn/dhp' data-reference='vnp$1' data-url='/en/sujato'>Dhp" +
-        verseConnector +
-        "$1$2</a>"
+      "<a class='ref' data-division='/sutta/kn/dhp' data-reference='vnp$1' data-url='/en/sujato'>Dhp.$1$2</a>"
     );
     // SUTTA NIPATA **TWO FORMS!**
     // Snp.verseNumber
@@ -147,16 +145,12 @@ export default function doTheDecoratingOfDictionary(dictionary) {
     // THERAGATHA
     item.text = item.text.replaceAll(
       /<span class='ref'>Thag\.(\d+)(.*?)<\/span>/g,
-      "<a class='ref' data-division='/sutta/kn/thag' data-reference='vnp$1' data-url='/en/sujato'>Thag" +
-        verseConnector +
-        "$1$2</a>"
+      "<a class='ref' data-division='/sutta/kn/thag' data-reference='vnp$1' data-url='/en/sujato'>Thag.$1$2</a>"
     );
     // THERIGATHA to VERSES
     item.text = item.text.replaceAll(
       /<span class='ref'>Thig\.(\d+)(.*?)<\/span>/g,
-      "<a class='ref' data-division='/sutta/kn/thig' data-reference='vnp$1' data-url='/en/sujato'>Thig" +
-        verseConnector +
-        "$1$2</a>"
+      "<a class='ref' data-division='/sutta/kn/thig' data-reference='vnp$1' data-url='/en/sujato'>Thig.$1$2</a>"
     );
     // VIMANAVATTHU
     //
@@ -165,7 +159,7 @@ export default function doTheDecoratingOfDictionary(dictionary) {
     //
     item.text = item.text.replaceAll(
       /<span class='ref'>Vv\.(\d+)\.(\d+)<\/span>/g,
-      "<a class='ref' href='https://suttacentral.net/vv$1/pli/ms#$2.1'>Vv.$1" + verseConnector + "$2</a>"
+      "<a class='ref' href='https://suttacentral.net/vv$1/pli/ms#$2.1'>Vv.$1:$2</a>"
     );
     // PETAVATTHU
     //
@@ -175,11 +169,11 @@ export default function doTheDecoratingOfDictionary(dictionary) {
     item.text = item.text
       .replaceAll(
         /<span class='ref'>Pv\.(\d+)\.(\d+)<\/span>/g,
-        "<a class='ref' href='https://suttacentral.net/pv$1/pli/ms#$2.1'>Pv.$1" + verseConnector + "$2</a>"
+        "<a class='ref' href='https://suttacentral.net/pv$1/pli/ms#$2.1'>Pv.$1:$2</a>"
       )
       .replaceAll(
         /<span class='ref'>Pv\.(\d+)#(\d+)<\/span>/g,
-        "<a class='ref' href='https://suttacentral.net/pv$1/pli/ms#$2.1'>Pv.$1" + verseConnector + "$2</a>"
+        "<a class='ref' href='https://suttacentral.net/pv$1/pli/ms#$2.1'>Pv.$1:$2</a>"
       )
       .replaceAll(
         /<span class='ref'>Pv\.(\d+)<\/span>/g,
@@ -285,11 +279,11 @@ export default function doTheDecoratingOfDictionary(dictionary) {
     item.text = item.text
       .replaceAll(
         /<span class='ref'>Vv\.(\d+)#(\d+)<\/span>/g,
-        "<a class='ref' href='https://suttacentral.net/vv$1/pli/ms#$2.1'>Vv.$1" + verseConnector + "$2</a>"
+        "<a class='ref' href='https://suttacentral.net/vv$1/pli/ms#$2.1'>Vv.$1:$2</a>"
       )
       .replaceAll(
         /<span class='ref'>Vv\.(\d+)<\/span>/g,
-        "<a class='ref' href='https://suttacentral.net/vv$1/pli/ms#$2.1'>Vv.$1" + verseConnector + "$2</a>"
+        "<a class='ref' href='https://suttacentral.net/vv$1/pli/ms#$2.1'>Vv.$1:$2</a>"
       );
 
     // Cp

@@ -25,6 +25,14 @@ body {
   white-space: pre;
 }
 
+#link-area {
+  border: solid;
+  width: 15rem;
+  margin-right: 1rem;
+  padding: 1rem;
+  background-color: white;
+}
+
 /* .bottom_fade {
   width: 15rem;
   height: 5rem;
