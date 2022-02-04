@@ -18,47 +18,16 @@ export default function countUniqueItems(array, booksOnly) {
       arrUniqueLines[currentLine] += 1;
     }
   }
+
   var sortedLines = [];
   for (var i in arrUniqueLines) {
-    // Skip lines with too few occurrences
     sortedLines.push([arrUniqueLines[i], i]);
   }
-  sortedLines.sort();
+
+  // sortedLines.sort();
   report = "";
   for (let i in sortedLines) {
-    report = report + sortedLines[i][0] + " ==> " + sortedLines[i][1] + "\n";
+    report = report + sortedLines[i][1] + " => " + sortedLines[i][0] + "\n";
   }
   return report;
 }
-
-// console.log(
-//   countUniqueItems([
-//     "three",
-//     "three",
-//     "five",
-//     "five",
-//     "five",
-//     "three",
-//     "five",
-//     "one",
-//     "five",
-//     "three",
-//     "three",
-//     "five",
-//     "five",
-//     "five",
-//     "three",
-//     "five",
-//     "one",
-//     "five",
-//     "three",
-//     "three",
-//     "five",
-//     "five",
-//     "five",
-//     "three",
-//     "five",
-//     "one",
-//     "five",
-//   ])
-// );

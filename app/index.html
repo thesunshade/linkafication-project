@@ -15,26 +15,39 @@
 
     <div class="content">
         <div class="control-area">
-            <div id="decorate-area">
-                <div>Processing <span id="current-dictionary-name"></span></div>
-                <button id="decorate">Decorate</button>
+            <div id="decorate-area" class="button-box">
+                <label for="dictionaries">Choose a dictionary:</label>
+                <select id="dictionaries" name="dictionaries">
+                    <option value="dhammika">Dhammika</option>
+                    <option value="dppn">DPPN</option>
+                    <option value="pts">PTS</option>
+                </select>
+                <button id="decorate" class="make">Decorate</button>
                 <div id="message"></div>
-                <textarea id="decorated-dictionary-box"></textarea>
-
-                <button id="copy-decorated-dictionary" class="btn">Copy Decorated dictionary to Clipboard</button>
-            </div>
-            <div id="results-area" class="hidden">
-                <button id="make-decorated-lists">Make decorated lists</button>
-                <div id="list-message"></div>
-                <button id="copy-decorated-list-citations" class="btn hidden">Copy Decorated citations to
+                <button id="copy-decorated-dictionary" class="btn hidden copy needs-decoration">Copy Decorated
+                    📘dictionary to
                     Clipboard</button>
-                <button id="copy-decoration-report" class="btn hidden">Copy Decoration Report to Clipboard</button>
+            </div>
+            <div id="results-area" class="hidden button-box needs-decoration">
+                <button id="make-decorated-lists" class="make">Make decorated lists</button>
+                <div id="list-message"></div>
+                <button id="copy-decorated-list-citations" class="btn hidden copy">Copy Decorated citations to
+                    Clipboard</button>
+                <button id="copy-decoration-report" class="btn hidden copy">Copy Decoration 📑Report to
+                    Clipboard</button>
 
             </div>
-            <div id="link-area" class="hidden">
-                <button id="link-all-things">Link it all up</button>
+            <div id="link-area" class="hidden button-box needs-decoration">
+                <button id="link-all-things" class="make">Link it all up</button>
                 <div id="link-message"></div>
-                <button id="copy-linked-dictionary" class="btn hidden">Copy linked dictionary to Clipboard</button>
+                <button id="copy-linked-dictionary" class="btn hidden copy">Copy linked 📘dictionary to
+                    Clipboard</button>
+            </div>
+
+            <div id="link-list-area" class="hidden button-box needs-decoration">
+                <button id="make-linked-lists" class="btn hidden make">Make linked lists</button>
+                <div id="link-list-message-area"></div>
+                <button id="copy-linking-report" class="btn hidden copy">Copy Linking 📑Report to Clipboard</button>
             </div>
         </div>
     </div>

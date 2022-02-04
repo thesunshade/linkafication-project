@@ -1,5 +1,5 @@
 body {
-  background-color: aquamarine;
+  background-color: #f5eedc;
 }
 
 .control-area {
@@ -8,29 +8,17 @@ body {
 }
 
 #decorate-area {
+}
+
+.button-box {
   border: solid;
-  width: 15rem;
+  width: 13rem;
   margin-right: 1rem;
   padding: 1rem;
   background-color: white;
-}
-
-#decorated-dictionary-box {
-  height: 10rem;
-  width: 14rem;
-  font-size: 0.5rem;
-  overflow: hidden;
-  padding: 0.5rem;
-  border: solid 1px;
-  white-space: pre;
 }
 
 #link-area {
-  border: solid;
-  width: 15rem;
-  margin-right: 1rem;
-  padding: 1rem;
-  background-color: white;
 }
 
 /* .bottom_fade {
@@ -49,4 +37,31 @@ body {
 
 .hidden {
   display: none;
+}
+
+button.copy {
+  background-color: #dd4a48;
+}
+
+button.make {
+  background-color: #97bfb4;
+}
+
+button.make:active {
+  background-color: #4f091d;
+  color: #f5eedc;
+}
+
+button {
+  border: solid 0px gainsboro;
+  border-radius: 7px;
+  padding: 0.3rem;
+  margin-top: 0.3rem;
+  margin-bottom: 0.3rem;
+  box-shadow: 5px 5px 10px gainsboro;
+}
+
+button:hover {
+  filter: brightness(90%);
+  color: #f5eedc;
 }

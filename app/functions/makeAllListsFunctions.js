@@ -40,13 +40,13 @@ export function makeListOfUndecorated(dictionary) {
 }
 
 export function removeExcludedCitations(cleanedList) {
-  let cleanedListString = "";
+  let cleanedListString = [];
   cleanedList.forEach(item => {
     if (item.match(/^[A-Za-zāīūṭḍ-]+/)) {
       const book = item.match(/^[A-Za-zāīūṭḍ-]+/).toString();
 
       if (book && !excluded.includes(book)) {
-        cleanedListString = cleanedListString + item + "\n";
+        cleanedListString = cleanedListString.concat(item);
       }
     }
   });

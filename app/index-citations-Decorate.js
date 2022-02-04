@@ -1,66 +1,112 @@
-import { dictionary } from "./dictionary.js";
-import linkDecorated from "./makeLinksFunction.js";
-import determineWhichDictionary from "./determineWhichDictionary.js";
+import { dhammikaDictionary } from "./dictionaries/dhammika-dictionary.js";
+import { dppnDictionary } from "./dictionaries/dppn-dictionary.js";
+import { ptsDictionary } from "./dictionaries/pts-dictionary.js";
+import linkDecorated from "./functions/makeLinksFunction.js";
+import countUniqueItems from "./functions/countUniqueItems.js";
+import determineWhichDictionary from "./functions/determineWhichDictionary.js";
+import convertMilSeconds from "./functions/convertMilSeconds.js";
+import countAllPotentialLinks from "./functions/countAllPotentialLinks.js";
 import {
   makeListOfUndecorated,
   makeListOfDecorated,
   listFinalLinksThroughDecorationOnly,
   listDecoratedCitationsCitationsOnly,
   removeExcludedCitations,
-} from "./makeAllListsFunctions.js";
-import doTheDecoratingOfDictionary from "./doTheDecoratingOfDictionary.js";
-import { makeListOfUnLinkedCitations } from "./makeLinkedListsFunction.js";
+} from "./functions/makeAllListsFunctions.js";
+import doTheDecoratingOfDictionary from "./functions/doTheDecoratingOfDictionary.js";
+import { makeListOfLinkedCitations, makeListOfUnLinkedCitations } from "./functions/makeLinkedListsFunctions.js";
 
+let dictionarySelector = document.getElementById("dictionaries");
 let messageArea = document.getElementById("message");
 let listMessageArea = document.getElementById("list-message");
 let linkMessageArea = document.getElementById("link-message");
+let linkListMessageArea = document.getElementById("link-list-message-area");
 let resultsArea = document.getElementById("results-area");
+let linkListArea = document.getElementById("link-list-area");
 let linksArea = document.getElementById("link-area");
 let decoratedDictionaryCopyButton = document.getElementById("copy-decorated-dictionary");
 let linkedDictionaryCopyButton = document.getElementById("copy-linked-dictionary");
 let decoratedListCitationsCopyButton = document.getElementById("copy-decorated-list-citations");
-let decoratedDictionaryBox = document.getElementById("decorated-dictionary-box");
-decoratedDictionaryBox.value = "";
+let dictionary;
+switch (dictionarySelector.value) {
+  case "dhammika":
+    dictionary = dhammikaDictionary;
+    break;
+  case "dppn":
+    dictionary = dppnDictionary;
+    break;
+  case "pts":
+    dictionary = ptsDictionary;
+    break;
+}
+
+dictionarySelector.addEventListener("change", event => {
+  console.log(event.target.value);
+  switch (event.target.value) {
+    case "dhammika":
+      dictionary = dhammikaDictionary;
+      break;
+    case "dppn":
+      dictionary = dppnDictionary;
+      break;
+    case "pts":
+      dictionary = ptsDictionary;
+      break;
+  }
+  let needsDecorationElements = document.getElementsByClassName("needs-decoration");
+  for (let i = 0; i < needsDecorationElements.length; i++) {
+    console.log(needsDecorationElements[i]);
+    needsDecorationElements[i].classList.add("hidden");
+  }
+});
+
 messageArea.innerHTML = "Please click";
 listMessageArea.innerHTML = "Please decorate first";
 
-let currentDictionaryName = document.getElementById("current-dictionary-name");
-currentDictionaryName.innerHTML = determineWhichDictionary(dictionary[0].word);
 let decorated;
-function decorate() {
+function decorate(dictionary) {
   messageArea.innerHTML = "Please wait...";
   let start = Date.now();
   decorated = doTheDecoratingOfDictionary(dictionary);
   console.log("decorated code");
   console.log(decorated);
+  numberOfPotentialCitations = countAllPotentialLinks(dictionary);
   let end = Date.now();
-  console.log(`Execution time: ${(end - start) / 1000} seconds`);
-  messageArea.innerHTML = `Decorated in ${(end - start) / 1000} seconds!<br>Check console`;
-  decoratedDictionaryBox.value = JSON.stringify(decorated, null, 4);
-  listMessageArea.innerHTML = "NOW you can make lists";
+  // console.log(`Execution time: ${convertMilSeconds(end - start)}`);
+  messageArea.innerHTML = `${determineWhichDictionary(dictionary[0].word)} decorated in ${convertMilSeconds(
+    end - start
+  )}!<br>
+  ${numberOfPotentialCitations} potential citations`;
+
+  listMessageArea.innerHTML = "";
+  decoratedDictionaryCopyButton.classList.remove("hidden");
   resultsArea.classList.remove("hidden");
   linksArea.classList.remove("hidden");
 }
 
 let decorateButton = document.getElementById("decorate");
-decorateButton.addEventListener("click", decorate);
+decorateButton.addEventListener("click", () => decorate(dictionary));
 
 function copyDecorated() {
   if (navigator && navigator.clipboard && navigator.clipboard.writeText)
-    return navigator.clipboard.writeText(decoratedDictionaryBox.value);
+    return navigator.clipboard.writeText(JSON.stringify(decorated, null, 4));
   return Promise.reject("The Clipboard API is not available.");
 }
 decoratedDictionaryCopyButton.addEventListener("click", copyDecorated);
 
+//
+// Making of Decorated lists
+//
 let listOfFinalLinksThroughDecorationOnly;
 let listOfAllDecorated;
 let cleanedListOfDecoratedCitations;
 let cleanedListOfDecoratedCitationsString;
 let listOfAllUndecorated;
 let listOfNonExcludedUndecorated;
-let report;
+let decorationReport;
+let numberOfPotentialCitations;
 
-function makeLists(decorated) {
+function makeDecoratedLists(decorated) {
   let start = Date.now();
 
   listOfFinalLinksThroughDecorationOnly = listFinalLinksThroughDecorationOnly(decorated);
@@ -87,15 +133,37 @@ function makeLists(decorated) {
   console.log("%c☝🏻 string of decorated citations", "color:green;background:black;font-weight:bold");
 
   let end = Date.now();
-  console.log(`Execution time: ${(end - start) / 1000} seconds`);
-  listMessageArea.innerHTML = `Lists made in ${
-    (end - start) / 1000
-  } seconds.<br>Please check the console for your lists!`;
+  console.log(`Execution time: ${convertMilSeconds(end - start)}`);
+  let linkCountMessage;
+  let linkCountDiscrepency = numberOfPotentialCitations - listOfAllDecorated.length - listOfAllUndecorated.length;
+  if (linkCountDiscrepency > 0) {
+    linkCountMessage = linkCountDiscrepency + " unaccounted for links";
+  } else if (linkCountDiscrepency === 0) {
+    linkCountMessage = "No links unacconted for!";
+  } else if (linkCountDiscrepency < 0) {
+    linkCountMessage = "links are off by " + linkCountDiscrepency;
+  }
+  listMessageArea.innerHTML = `Lists made in ${convertMilSeconds(
+    end - start
+  )}.<br>Please check the console for your lists!<br><br>
+  ${listOfFinalLinksThroughDecorationOnly.length} citations with complete links.<br>
+  ${listOfAllDecorated.length - listOfFinalLinksThroughDecorationOnly.length} citations decorated.<br>
+  ${listOfAllUndecorated.length} undecorated citations<br>
+  ${linkCountMessage}`;
 
-  report = `# ${determineWhichDictionary(dictionary[0].word)} decorating report
+  decorationReport = `# ${determineWhichDictionary(dictionary[0].word)} decorating report
 
-  * [Raw Cleaned up dictionary file](https://raw.githubusercontent.com/thesunshade/linkafication-project/main/DPPN/pli2en_dppn.json)
-  * [Raw Decorated Dictionary File](https://raw.githubusercontent.com/thesunshade/linkafication-project/main/DPPN/DPPN-Decorated-pli2en_dppn.json)
+  * [Raw Cleaned up dictionary file](https://raw.githubusercontent.com/thesunshade/linkafication-project/main/${determineWhichDictionary(
+    dictionary[0].word
+  )}/pli2en_${determineWhichDictionary(dictionary[0].word).toLowerCase()}.json)
+  * [Raw Decorated Dictionary File](https://raw.githubusercontent.com/thesunshade/linkafication-project/main/${determineWhichDictionary(
+    dictionary[0].word
+  )}/${determineWhichDictionary(dictionary[0].word)}-Decorated-pli2en_${determineWhichDictionary(
+    dictionary[0].word
+  ).toLowerCase()}.json)
+
+  * ${listOfFinalLinksThroughDecorationOnly.length} citations with complete links.<br>
+  * ${listOfAllDecorated.length - listOfFinalLinksThroughDecorationOnly.length} citations decorated.
 
   ## Links made through decoration process
 
@@ -104,7 +172,7 @@ function makeLists(decorated) {
 <details><summary>Show full list</summary>
 
 \`\`\`html
-${listOfFinalLinksThroughDecorationOnly.join("\n")}
+${countUniqueItems(listOfFinalLinksThroughDecorationOnly)}
 \`\`\`
 </details>
 
@@ -115,7 +183,7 @@ This includes both those that are final links as well as those only decorated.
 <details><summary>Show full list</summary>
 
 \`\`\`html
-${listOfAllDecorated.sort().join("\n")}
+${countUniqueItems(listOfAllDecorated)}
 \`\`\`
 </details>
 
@@ -126,7 +194,7 @@ Just the citations from the list above
 <details><summary>Show full list</summary>
 
 \`\`\`html
-${cleanedListOfDecoratedCitations.sort().join("\n")}
+${countUniqueItems(cleanedListOfDecoratedCitations)}
 \`\`\`
 </details>
 
@@ -135,7 +203,7 @@ ${cleanedListOfDecoratedCitations.sort().join("\n")}
 <details><summary>Show full list</summary>
 
 \`\`\`html
-${listOfAllUndecorated.sort().join("\n")}
+${countUniqueItems(listOfAllUndecorated)}
 \`\`\`
 </details>
 
@@ -146,19 +214,19 @@ This means that for some reason they *should* be decorated, but something is wro
 <details><summary>Show full list</summary>
 
 \`\`\`html
-${listOfNonExcludedUndecorated}
+${countUniqueItems(listOfNonExcludedUndecorated)}
 \`\`\`
 </details>
 `;
-  console.log(report);
+
   decorationReportButton.classList.remove("hidden");
 }
 
 let decorationReportButton = document.getElementById("copy-decoration-report");
-decorationReportButton.addEventListener("click", () => navigator.clipboard.writeText(report));
+decorationReportButton.addEventListener("click", () => navigator.clipboard.writeText(decorationReport));
 
 let listButton = document.getElementById("make-decorated-lists");
-listButton.addEventListener("click", () => makeLists(decorated));
+listButton.addEventListener("click", () => makeDecoratedLists(decorated));
 
 let linkedDictionary;
 function doTheLinkingUp() {
@@ -166,26 +234,76 @@ function doTheLinkingUp() {
   let start = Date.now();
   linkedDictionary = linkDecorated(dictionary);
   let end = Date.now();
-  console.log(`Execution time: ${(end - start) / 1000} seconds`);
-  linkMessageArea.innerHTML = `Check console for  your linked dictionary<br>Lists made in ${
-    (end - start) / 1000
-  } seconds.`;
+  console.log(`Execution time: ${convertMilSeconds(end - start)}`);
+  linkMessageArea.innerHTML = `Linked dictionary made in ${convertMilSeconds(end - start)}.`;
   linkedDictionaryCopyButton.classList.remove("hidden");
-
-  let listOfUnLinkedCitations;
-  function makeTheLinkedLists(linkedDictionary) {
-    listOfUnLinkedCitations = makeListOfUnLinkedCitations(linkedDictionary);
-    return listOfUnLinkedCitations;
-  }
-  console.log(makeTheLinkedLists(linkedDictionary));
+  makeLinkedListButton.classList.remove("hidden");
+  linkListArea.classList.remove("hidden");
 }
 
 let linkButton = document.getElementById("link-all-things");
 linkButton.addEventListener("click", () => doTheLinkingUp());
 
-function copyLinkedDictionary() {
-  if (navigator && navigator.clipboard && navigator.clipboard.writeText)
-    return navigator.clipboard.writeText(JSON.stringify(linkedDictionary, null, 4));
-  return Promise.reject("The Clipboard API is not available.");
+linkedDictionaryCopyButton.addEventListener("click", () =>
+  navigator.clipboard.writeText(JSON.stringify(linkedDictionary, null, 4))
+);
+
+let listOfUnLinkedCitations;
+let listOfLinkedCitations;
+let linkingReport;
+
+function makelinkedLists(linkedDictionary) {
+  let start = Date.now();
+  listOfLinkedCitations = makeListOfLinkedCitations(linkedDictionary);
+  console.log(listOfLinkedCitations.sort().join("\n"));
+  console.log(listOfLinkedCitations.length);
+  console.log("%c☝🏻 string of all citations", "color:green;background:black;font-weight:bold");
+
+  listOfUnLinkedCitations = makeListOfUnLinkedCitations(linkedDictionary);
+  console.log(listOfUnLinkedCitations.sort().join("\n"));
+  console.log(listOfUnLinkedCitations.length);
+  console.log("%c☝🏻 string of all unlinked citations", "color:red;background:black;font-weight:bold");
+  let end = Date.now();
+  console.log(`Execution time: ${convertMilSeconds(end - start)}`);
+  linkListMessageArea.innerHTML = `Linked lists made in ${convertMilSeconds(end - start)}.`;
+  linkingReportButton.classList.remove("hidden");
+
+  linkingReport = `# ${determineWhichDictionary(dictionary[0].word)} linking report
+
+  
+  * [Raw Linked Up Dictionary File](https://raw.githubusercontent.com/thesunshade/linkafication-project/main/${determineWhichDictionary(
+    dictionary[0].word
+  )}/${determineWhichDictionary(dictionary[0].word)}-LinkedUp-pli2en_${determineWhichDictionary(
+    dictionary[0].word
+  ).toLowerCase()}.json)
+
+  * ${listOfLinkedCitations.length} citations with complete links.<br>
+  * ${listOfUnLinkedCitations.length} unlinked citations.
+
+  ## All Links made through both decoration and linking process
+
+<details><summary>Show full list</summary>
+
+\`\`\`html
+${listOfLinkedCitations.join("\n")}
+\`\`\`
+</details>
+
+## List of all unlinked citations
+
+<details><summary>Show full list</summary>
+
+\`\`\`html
+${listOfUnLinkedCitations.sort().join("\n")}
+\`\`\`
+</details>
+
+
+`;
 }
-linkedDictionaryCopyButton.addEventListener("click", copyLinkedDictionary);
+
+let makeLinkedListButton = document.getElementById("make-linked-lists");
+makeLinkedListButton.addEventListener("click", () => makelinkedLists(linkedDictionary));
+
+let linkingReportButton = document.getElementById("copy-linking-report");
+linkingReportButton.addEventListener("click", () => navigator.clipboard.writeText(linkingReport));

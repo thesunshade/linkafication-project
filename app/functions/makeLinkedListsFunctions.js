@@ -1,9 +1,20 @@
+export function makeListOfLinkedCitations(linkedDictionary) {
+  const regexunlinked = new RegExp("<a class='ref' href(.+?)</a>", "g");
+  let list = [];
+  linkedDictionary.forEach(item => {
+    if (item.text.match(regexunlinked) != null) {
+      list = list.concat(item.text.match(regexunlinked));
+    }
+  });
+  return list;
+}
+
 export function makeListOfUnLinkedCitations(linkedDictionary) {
   // not linked up
   const regexunlinked = new RegExp("<a class='ref' data-division=(.+?)</a>", "g");
   let list = [];
   linkedDictionary.forEach(item => {
-    if (list.concat(item.text.match(regexunlinked)) != null) {
+    if (item.text.match(regexunlinked) != null) {
       list = list.concat(item.text.match(regexunlinked));
     }
   });

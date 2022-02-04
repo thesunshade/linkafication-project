@@ -2,7 +2,7 @@ export default function doTheDecoratingOfDictionary(dictionary) {
   // Variables
   const verseConnector = " verse ";
 
-  let decorated = [...dictionary];
+  let decorated = JSON.parse(JSON.stringify(dictionary));
   decorated.forEach(item => {
     // VINAYA
     //
@@ -211,7 +211,7 @@ export default function doTheDecoratingOfDictionary(dictionary) {
     //
     // creates final link. Takes Bv.dd.dd and turns it into chapter and verse first id
     item.text = item.text.replaceAll(
-      /<span class='ref'>Bv\.(\d+)\.(\d+)(.+?)<\/span>/g,
+      /<span class='ref'>Bv\.(\d+)\.(\d+)(.*?)<\/span>/g,
       "<a class='ref' href='https://suttacentral.net/bv$1/pli/ms#$2.1'>Bv.$1.$2$3</a>"
     );
 

@@ -8,7 +8,7 @@ export default function determineWhichDictionary(firstEntry) {
       dictionaryName = "DPPN";
       break;
     case "akka":
-      dictionaryName = "Nature";
+      dictionaryName = "Dhammika";
   }
 
   return dictionaryName;
