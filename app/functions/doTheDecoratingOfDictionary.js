@@ -107,7 +107,7 @@ export default function doTheDecoratingOfDictionary(dictionary) {
     //
     item.text = item.text.replaceAll(
       /<span class='ref'>Khp\.(\d)\<\/span>/g,
-      "<a class='ref' href='https://suttacentral.net/kp$1/pli/ms#$2.1'>Kp.$1</a>"
+      "<a class='ref' href='https://suttacentral.net/kp$1/pli/ms#.1'>Kp.$1</a>"
     );
     item.text = item.text.replaceAll(
       /<span class='ref'>Khp\.(\d)\.(\d+)<\/span>/g,
@@ -283,7 +283,7 @@ export default function doTheDecoratingOfDictionary(dictionary) {
       )
       .replaceAll(
         /<span class='ref'>Vv\.(\d+)<\/span>/g,
-        "<a class='ref' href='https://suttacentral.net/vv$1/pli/ms#$2.1'>Vv.$1:$2</a>"
+        "<a class='ref' href='https://suttacentral.net/vv$1/pli/ms'>Vv.$1</a>"
       );
 
     // Cp

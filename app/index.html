@@ -15,7 +15,7 @@
 
     <div class="content">
         <div class="control-area">
-            <div id="decorate-area" class="button-box">
+            <div id="decorate-area" class="button-box hidden">
                 <label for="dictionaries">Choose a dictionary:</label>
                 <select id="dictionaries" name="dictionaries">
                     <option value="dhammika">Dhammika</option>
@@ -31,23 +31,58 @@
             <div id="results-area" class="hidden button-box needs-decoration">
                 <button id="make-decorated-lists" class="make">Make decorated lists</button>
                 <div id="list-message"></div>
-                <button id="copy-decorated-list-citations" class="btn hidden copy">Copy Decorated citations to
+                <button id="copy-decoration-report" class="btn hidden copy needs-decoration list-buttons">Copy
+                    Decoration 📑Report to
                     Clipboard</button>
-                <button id="copy-decoration-report" class="btn hidden copy">Copy Decoration 📑Report to
-                    Clipboard</button>
+                <button id="copy-final-links-html" class="btn hidden copy needs-decoration list-buttons individual"
+                    title="Final links created only through decoration process">Final
+                    Links HTML</button>
+                <button id="copy-decorated-html" class="btn hidden copy needs-decoration list-buttons individual"
+                    title="All citations decorated or linked through decoration process">All
+                    Decorated HTML</button>
+                <button id="copy-decorated-citations" class="btn hidden copy needs-decoration list-buttons individual"
+                    title="Just the citations, no markup">All
+                    Decorated citations</button>
+                <button id="copy-decorated-books" class="btn hidden copy needs-decoration list-buttons individual"
+                    title="Frequency of each book decorated">All
+                    Decorated books</button>
+                <button id="copy-all-undecorated" class="btn hidden copy needs-decoration list-buttons individual"
+                    title="Everything not decorated">All
+                    Undecorated</button>
+                <button id="copy-undecorated-books" class="btn hidden copy needs-decoration list-buttons individual"
+                    title="Frequency of each book undecorated">All
+                    Undecorated books</button>
+                <button id="copy-nonexcluded-undecorated"
+                    class="btn hidden copy needs-decoration list-buttons individual"
+                    title="Everything not decorated excluding citations not being processed">Non-excluded
+                    undecorated</button>
+                <button id="copy-excluded" class="btn hidden copy needs-decoration list-buttons individual"
+                    title="Complete list of excluded books">Excluded List</button>
 
             </div>
             <div id="link-area" class="hidden button-box needs-decoration">
                 <button id="link-all-things" class="make">Link it all up</button>
                 <div id="link-message"></div>
-                <button id="copy-linked-dictionary" class="btn hidden copy">Copy linked 📘dictionary to
+                <button id="copy-linked-dictionary" class="btn hidden copy needs-decoration">Copy linked 📘dictionary to
                     Clipboard</button>
             </div>
 
             <div id="link-list-area" class="hidden button-box needs-decoration">
                 <button id="make-linked-lists" class="btn hidden make">Make linked lists</button>
                 <div id="link-list-message-area"></div>
-                <button id="copy-linking-report" class="btn hidden copy">Copy Linking 📑Report to Clipboard</button>
+                <button id="copy-linking-report" class="btn hidden link-buttons needs-decoration copy">Copy Linking
+                    📑Report to
+                    Clipboard</button>
+                <button id="copy-completed-linking-html"
+                    class="btn hidden copy needs-decoration link-buttons individual"
+                    title="Final links created through linking process">Final
+                    Links HTML</button>
+                <button id="copy-decorated-unlinked" class="btn hidden copy needs-decoration link-buttons individual"
+                    title="All citations that had been decorated but weren't linked">All
+                    Decorated unlinked HTML</button>
+                <!-- <button id="copy----" class="btn hidden copy needs-decoration list-buttons individual"
+                    title="Just the citations, no markup">All
+                    Decorated citations</button> -->
             </div>
         </div>
     </div>

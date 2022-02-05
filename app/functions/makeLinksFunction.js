@@ -25,14 +25,13 @@ import { kvIds } from "../refs/kvIds.js";
 import { vinIds } from "../refs/vinIds.js";
 
 export default function linkDecorated(decoratedDictionary) {
-  let linked = [...decoratedDictionary];
+  let linked = JSON.parse(JSON.stringify(decoratedDictionary));
 
   const regex = new RegExp(
     "<a class='ref' data-division='(.+?)' data-reference='(.+?)' data-url='(.+?)'>(.+?)</a>",
     "g"
   );
 
-  var start = Date.now();
   linked.forEach(entry => {
     let array = [...entry.text.matchAll(regex)];
     array.forEach(item => {
@@ -253,9 +252,6 @@ export default function linkDecorated(decoratedDictionary) {
       }
     });
   });
-  console.log(linked);
-  var end = Date.now();
-  console.log(`Execution time: ${(end - start) / 1000} seconds`);
 
   return linked;
 }

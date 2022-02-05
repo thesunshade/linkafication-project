@@ -23,6 +23,17 @@ export function makeListOfUnLinkedCitations(linkedDictionary) {
   return list;
 }
 
+export function removeJatakaFromUnlinkedList(listOfUnLinkedCitations) {
+  let listWithoutJataka = [];
+  let regex = new RegExp("kn/ja");
+  listOfUnLinkedCitations.forEach(item => {
+    if (!regex.test(item)) {
+      listWithoutJataka.push(item);
+    }
+  });
+  return listWithoutJataka;
+}
+
 export function tobefiguredoutfunctions() {
   const regex1 = new RegExp("<a class='ref' data-division=.+?>");
   const regex2 = new RegExp("</a>");

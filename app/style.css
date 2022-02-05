@@ -35,6 +35,11 @@ body {
   padding: 1rem;
 }
 
+span.time {
+  font-size: 0.7rem;
+  font-family: sans-serif;
+}
+
 .hidden {
   display: none;
 }
@@ -64,4 +69,20 @@ button {
 button:hover {
   filter: brightness(90%);
   color: #f5eedc;
+}
+
+div.count-messages {
+  font-family: monospace;
+  font-size: 0.7rem;
+}
+
+button.individual {
+  background-color: #90302f;
+  color: #97bfb4;
+  font-size: 0.6rem;
+}
+button.individual:hover {
+  filter: brightness(100%);
+  color: #f5eedc;
+  background-color: #521110;
 }
