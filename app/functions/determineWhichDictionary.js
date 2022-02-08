@@ -2,7 +2,7 @@ export default function determineWhichDictionary(firstEntry) {
   let dictionaryName;
   switch (firstEntry) {
     case "a":
-      dictionaryName = "PED";
+      dictionaryName = "PTS";
       break;
     case "akaniṭṭhā":
       dictionaryName = "DPPN";
