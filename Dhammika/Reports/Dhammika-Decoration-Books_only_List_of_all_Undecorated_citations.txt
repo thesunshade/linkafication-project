@@ -1,0 +1,10 @@
+Ap => 13
+Bc => 6
+Bcv => 1
+Bv => 1
+Dhp-a => 1
+Jm => 1
+Mvu => 9
+Nidd => 1
+Vism => 6
+Vv-a => 4

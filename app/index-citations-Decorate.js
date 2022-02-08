@@ -198,32 +198,54 @@ ${detailsWrapper(countUniqueItems(listOfNonExcludedUndecorated.sort()))}
   decorationReportButton.classList.remove("hidden");
 }
 
+function saveFile(file, fileName) {
+  var a = document.createElement("a");
+  a.href = window.URL.createObjectURL(new Blob([file], { type: "text/plain;charset=utf-8" }));
+  a.download = `${determineWhichDictionary(dictionary[0].word)}-${fileName}.txt`;
+  a.click();
+  navigator.clipboard.writeText(file);
+}
+
 let decorationReportButton = document.getElementById("copy-decoration-report");
-decorationReportButton.addEventListener("click", () => navigator.clipboard.writeText(decorationReport));
+decorationReportButton.addEventListener("click", () => saveFile(decorationReport, "decorationReport.txt"));
 
 let listButton = document.getElementById("make-decorated-lists");
 listButton.addEventListener("click", () => makeDecoratedLists(decorated));
 
 copyFinalLinksHtml.addEventListener("click", () =>
-  navigator.clipboard.writeText(listOfFinalLinksThroughDecorationOnly.join("\n"))
+  saveFile(
+    listOfFinalLinksThroughDecorationOnly.sort().join("\n"),
+    "Decoration-List_of_final_links_made_through_decoration_only"
+  )
 );
-copyDecoratedHtml.addEventListener("click", () => navigator.clipboard.writeText(listOfAllDecorated.join("\n")));
+
+copyDecoratedHtml.addEventListener("click", () =>
+  saveFile(listOfAllDecorated.sort().join("\n"), "Decoration-List_of_all_decorated_citations_with_markup")
+);
+
 copyDecoratedCitations.addEventListener("click", () =>
-  navigator.clipboard.writeText(cleanedListOfDecoratedCitations.join("\n"))
+  saveFile(cleanedListOfDecoratedCitations.join("\n"), "Decoration-Citations_Only_list_of_all_decorated_citations")
 );
 copyDecoratedBooks.addEventListener("click", () =>
-  navigator.clipboard.writeText(countUniqueItems(cleanedListOfDecoratedCitations, true))
+  saveFile(
+    countUniqueItems(cleanedListOfDecoratedCitations, true),
+    "Decoration-Book_Names_Only_list_of_all_decorated_citations"
+  )
 );
+
 copyAllUndecoratedCitations.addEventListener("click", () =>
-  navigator.clipboard.writeText(listOfAllUndecorated.join("\n"))
+  saveFile(listOfAllUndecorated.sort().join("\n"), "Decoration-List_of_all_Undecorated_citations")
 );
 copyUndecoratedBooks.addEventListener("click", () =>
-  navigator.clipboard.writeText(countUniqueItems(listOfAllUndecorated, true))
+  saveFile(countUniqueItems(listOfAllUndecorated, true), "Decoration-Books_only_List_of_all_Undecorated_citations")
 );
 copyAllNonexcludedUndecoratedCitations.addEventListener("click", () =>
-  navigator.clipboard.writeText(listOfNonExcludedUndecorated.join("\n"))
+  navigator.clipboard.writeText(
+    listOfNonExcludedUndecorated.join("\n"),
+    "Decoration-List_of_all_Undecorated_citations_not_excluded"
+  )
 );
-copyExcluded.addEventListener("click", () => navigator.clipboard.writeText(excluded.sort().join("\n")));
+copyExcluded.addEventListener("click", () => saveFile(excluded.sort().join("\n"), "All_books_being_excluded"));
 
 //
 // Link up
@@ -299,7 +321,7 @@ function makelinkedLists(linkedDictionary) {
   ## All ${listOfLinkedCitations.length} links made through both decoration and linking process<br><br>
 ${detailsWrapper(countUniqueItems(listOfLinkedCitations))}
 
-## List of all ${listWithoutJataka.length}unlinked citations excluding Jataka citations<br><br>
+## List of all ${listWithoutJataka.length} unlinked citations excluding Jataka citations<br><br>
 There are ${listOfUnLinkedCitations.length - listWithoutJataka.length} unlinked Jataka citations not included.
 
 ${detailsWrapper(countUniqueItems(listWithoutJataka.sort()))}

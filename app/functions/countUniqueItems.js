@@ -3,6 +3,7 @@ export default function countUniqueItems(array, booksOnly) {
   let countLines = array.length;
   let arrUniqueLines = [];
 
+  // true will make a list of only the book names, not full citations
   if (booksOnly === true) {
     for (let i = 0; i < countLines; i++) {
       array[i] = array[i].replace(/^([A-Za-zāīūṭḍḷṁṇñṅ-]+).+$/, "$1");
