@@ -32,7 +32,7 @@ Just the frequency of individual books from list above.
 * [DPPN-Decor-Books_only_all_Undecorated_citations.txt](https://github.com/thesunshade/linkafication-project/blob/main/DPPN/Reports/DPPN-Decor-Books_only_all_Undecorated_citations.txt)<br>
 
 ### List of all non decorated citations that we are not ignoring
-This means that for some reason they *should* be decorated, but something is wrong with them. To see the list of those citations that are being ignored (either because we can't figure out how to turn them into links or because they aren't present on SC) you can check [this file](https://github.com/thesunshade/linkafication-project/blob/main/app/excludeList.js).
+This means that for some reason they *should* be decorated, but something is wrong with them. To see the list of those citations that are being ignored (either because we can't figure out how to turn them into links or because they aren't present on SC) you can check [this file](https://github.com/thesunshade/linkafication-project/blob/main/app/functions/excludeList.js).
 * [DPPN-Decor-All_Undecorated_citations_not_excluded.txt](https://github.com/thesunshade/linkafication-project/blob/main/DPPN/Reports/DPPN-Decor-All_Undecorated_citations_not_excluded.txt)<br>
 # DPPN linking report Tue Feb 08 2022 14:52:31 GMT+0530 (India Standard Time)
   <br><br>
