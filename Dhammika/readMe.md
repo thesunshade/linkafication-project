@@ -1,4 +1,4 @@
-# Dhammika decorating report Tue Feb 08 2022 14:03:08 GMT+0530 (India Standard Time)
+# Dhammika decorating report Tue Feb 08 2022 14:04:46 GMT+0530 (India Standard Time)
   <br><br>
   * [Raw Cleaned up dictionary file](https://raw.githubusercontent.com/thesunshade/linkafication-project/main/Dhammika/pli2en_dhammika.json)
   * [Raw Decorated Dictionary File](https://raw.githubusercontent.com/thesunshade/linkafication-project/main/Dhammika/Reports/Dhammika-Decorated-pli2en_dhammika.json)
@@ -8,7 +8,7 @@
 
   ## Links made through decoration process<br><br>
   Some citations match the refrence ids enough that it is possible to create the final link at the decoration stage. This is them.
-*[Dhammika-Decor-List_of_final_links_made_through_decoration_only.txt](https://github.com/thesunshade/linkafication-project/blob/main/Dhammika/Reports/Dhammika-Decor-List_of_final_links_made_through_decoration_only.txt)<br>
+* [Dhammika-Decor-List_of_final_links_made_through_decoration_only.txt](https://github.com/thesunshade/linkafication-project/blob/main/Dhammika/Reports/Dhammika-Decor-List_of_final_links_made_through_decoration_only.txt)<br>
 
 ## List of all decorated citations<br><br>
 This includes both those that are final links as well as those only decorated.
