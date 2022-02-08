@@ -1,4 +1,4 @@
-# Dhammika decorating report Tue Feb 08 2022 14:17:55 GMT+0530 (India Standard Time)
+# Dhammika decorating report Tue Feb 08 2022 14:28:02 GMT+0530 (India Standard Time)
   <br><br>
   * [Raw Cleaned up dictionary file](https://raw.githubusercontent.com/thesunshade/linkafication-project/main/Dhammika/pli2en_dhammika.json)
   * [Raw Decorated Dictionary File](https://raw.githubusercontent.com/thesunshade/linkafication-project/main/Dhammika/Reports/Dhammika-Decorated-pli2en_dhammika.json)
@@ -18,53 +18,18 @@ This includes both those that are final links as well as those only decorated.
 
 ### List of all decorated citations without html markup<br><br>
 Just the citations from the list above
-
-<details><summary>Show full list</summary>
-
-```html
-Dhammika
-```
-</details>
-    
+* [Dhammika-Decor-Citations_Only_all_decorated_citations.txt](https://github.com/thesunshade/linkafication-project/blob/main/Dhammika/Reports/Dhammika-Decor-Citations_Only_all_decorated_citations.txt)<br>
 ### Count of books decorated
 Just the frequency of individual books from list above.
-
-<details><summary>Show full list</summary>
-
-```html
-Dhammika
-```
-</details>
-    
+* [Dhammika-Decor-Book_Names_Only_all_decorated_citations.txt](https://github.com/thesunshade/linkafication-project/blob/main/Dhammika/Reports/Dhammika-Decor-Book_Names_Only_all_decorated_citations.txt)<br>
 
 ### List of all not decorated citations<br><br>
-
-<details><summary>Show full list</summary>
-
-```html
-Dhammika
-```
-</details>
-    
+* [Dhammika-Decor-All_Undecorated_citations.txt](https://github.com/thesunshade/linkafication-project/blob/main/Dhammika/Reports/Dhammika-Decor-All_Undecorated_citations.txt)<br>
 
 ### Count of books Undecorated
 Just the frequency of individual books from list above.
-
-<details><summary>Show full list</summary>
-
-```html
-Dhammika
-```
-</details>
-    
+* [Dhammika-Decor-Books_only_all_Undecorated_citations.txt](https://github.com/thesunshade/linkafication-project/blob/main/Dhammika/Reports/Dhammika-Decor-Books_only_all_Undecorated_citations.txt)<br>
 
 ### List of all non decorated citations that we are not ignoring<br><br>
 This means that for some reason they *should* be decorated, but something is wrong with them. To see the list of those citations that are being ignored (either because we can't figure out how to turn them into links or because they aren't present on SC) you can check [this file](https://github.com/thesunshade/linkafication-project/blob/main/app/excludeList.js).
-
-<details><summary>Show full list</summary>
-
-```html
-Dhammika
-```
-</details>
-    
+* [Dhammika-Decor-All_Undecorated_citations_not_excluded.txt](https://github.com/thesunshade/linkafication-project/blob/main/Dhammika/Reports/Dhammika-Decor-All_Undecorated_citations_not_excluded.txt)<br>
