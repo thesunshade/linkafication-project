@@ -87,6 +87,17 @@ dictionarySelector.addEventListener("change", event => {
   message.innerHTML = "";
 });
 
+function saveFile(file, fileName, extension) {
+  if (extension === null) {
+    extension = "txt";
+  }
+  var a = document.createElement("a");
+  a.href = window.URL.createObjectURL(new Blob([file], { type: "text/plain;charset=utf-8" }));
+  a.download = `${determineWhichDictionary(dictionary[0].word)}-${fileName}.${extension}`;
+  a.click();
+  navigator.clipboard.writeText(file);
+}
+
 //
 // Decorate
 //
@@ -111,7 +122,11 @@ let decorateButton = document.getElementById("decorate");
 decorateButton.addEventListener("click", () => decorate(dictionary));
 
 decoratedDictionaryCopyButton.addEventListener("click", () =>
-  navigator.clipboard.writeText(JSON.stringify(decorated, null, 4))
+  saveFile(
+    JSON.stringify(decorated, null, 4),
+    "Decorated-pli2en_" + determineWhichDictionary(dictionary[0].word).toLowerCase(),
+    "json"
+  )
 );
 
 //
@@ -123,6 +138,13 @@ let cleanedListOfDecoratedCitations;
 let listOfAllUndecorated;
 let listOfNonExcludedUndecorated;
 let decorationReport;
+
+function reportLinkWrapper(dictionaryName, fileName, extension) {
+  if (!extension) {
+    extension = "txt";
+  }
+  return `[${fileName}.${extension}](https://github.com/thesunshade/linkafication-project/blob/main/${dictionaryName}/Reports/${dictionaryName}-${fileName}.${extension})`;
+}
 
 function makeDecoratedLists(decorated) {
   let start = Date.now();
@@ -158,7 +180,7 @@ function makeDecoratedLists(decorated) {
   ).toLocaleString()}</b> citations decorated.<br>
   <b>${listOfAllUndecorated.length.toLocaleString()}</b> undecorated citations<br>
   ${linkCountMessage}</div>`;
-
+  const currentDictionary = determineWhichDictionary(dictionary[0].word);
   //
   //DECORATION REPORT
   decorationReport = `# ${determineWhichDictionary(dictionary[0].word)} decorating report ${Date().toLocaleString()}
@@ -168,7 +190,7 @@ function makeDecoratedLists(decorated) {
   )}/pli2en_${determineWhichDictionary(dictionary[0].word).toLowerCase()}.json)
   * [Raw Decorated Dictionary File](https://raw.githubusercontent.com/thesunshade/linkafication-project/main/${determineWhichDictionary(
     dictionary[0].word
-  )}/${determineWhichDictionary(dictionary[0].word)}-Decorated-pli2en_${determineWhichDictionary(
+  )}/Reports/${determineWhichDictionary(dictionary[0].word)}-Decorated-pli2en_${determineWhichDictionary(
     dictionary[0].word
   ).toLowerCase()}.json)
 
@@ -177,7 +199,7 @@ function makeDecoratedLists(decorated) {
 
   ## Links made through decoration process<br><br>
   Some citations match the refrence ids enough that it is possible to create the final link at the decoration stage. This is them.
-${detailsWrapper(countUniqueItems(listOfFinalLinksThroughDecorationOnly))}
+${reportLinkWrapper("Decor-List_of_final_links_made_through_decoration_only", currentDictionary)}
 
 ## List of all decorated citations<br><br>
 This includes both those that are final links as well as those only decorated.
@@ -198,16 +220,8 @@ ${detailsWrapper(countUniqueItems(listOfNonExcludedUndecorated.sort()))}
   decorationReportButton.classList.remove("hidden");
 }
 
-function saveFile(file, fileName) {
-  var a = document.createElement("a");
-  a.href = window.URL.createObjectURL(new Blob([file], { type: "text/plain;charset=utf-8" }));
-  a.download = `${determineWhichDictionary(dictionary[0].word)}-${fileName}.txt`;
-  a.click();
-  navigator.clipboard.writeText(file);
-}
-
 let decorationReportButton = document.getElementById("copy-decoration-report");
-decorationReportButton.addEventListener("click", () => saveFile(decorationReport, "decorationReport.txt"));
+decorationReportButton.addEventListener("click", () => saveFile(decorationReport, "DecorationReport", "md"));
 
 let listButton = document.getElementById("make-decorated-lists");
 listButton.addEventListener("click", () => makeDecoratedLists(decorated));
@@ -215,35 +229,29 @@ listButton.addEventListener("click", () => makeDecoratedLists(decorated));
 copyFinalLinksHtml.addEventListener("click", () =>
   saveFile(
     listOfFinalLinksThroughDecorationOnly.sort().join("\n"),
-    "Decoration-List_of_final_links_made_through_decoration_only"
+    "Decor-List_of_final_links_made_through_decoration_only"
   )
 );
 
 copyDecoratedHtml.addEventListener("click", () =>
-  saveFile(listOfAllDecorated.sort().join("\n"), "Decoration-List_of_all_decorated_citations_with_markup")
+  saveFile(listOfAllDecorated.sort().join("\n"), "Decor-All_decorated_citations_with_markup")
 );
 
 copyDecoratedCitations.addEventListener("click", () =>
-  saveFile(cleanedListOfDecoratedCitations.join("\n"), "Decoration-Citations_Only_list_of_all_decorated_citations")
+  saveFile(cleanedListOfDecoratedCitations.join("\n"), "Decor-Citations_Only_all_decorated_citations")
 );
 copyDecoratedBooks.addEventListener("click", () =>
-  saveFile(
-    countUniqueItems(cleanedListOfDecoratedCitations, true),
-    "Decoration-Book_Names_Only_list_of_all_decorated_citations"
-  )
+  saveFile(countUniqueItems(cleanedListOfDecoratedCitations, true), "Decor-Book_Names_Only_all_decorated_citations")
 );
 
 copyAllUndecoratedCitations.addEventListener("click", () =>
-  saveFile(listOfAllUndecorated.sort().join("\n"), "Decoration-List_of_all_Undecorated_citations")
+  saveFile(listOfAllUndecorated.sort().join("\n"), "Decor-All_Undecorated_citations")
 );
 copyUndecoratedBooks.addEventListener("click", () =>
-  saveFile(countUniqueItems(listOfAllUndecorated, true), "Decoration-Books_only_List_of_all_Undecorated_citations")
+  saveFile(countUniqueItems(listOfAllUndecorated, true), "Decor-Books_only_all_Undecorated_citations")
 );
 copyAllNonexcludedUndecoratedCitations.addEventListener("click", () =>
-  navigator.clipboard.writeText(
-    listOfNonExcludedUndecorated.join("\n"),
-    "Decoration-List_of_all_Undecorated_citations_not_excluded"
-  )
+  saveFile(listOfNonExcludedUndecorated.join("\n"), "Decor-All_Undecorated_citations_not_excluded")
 );
 copyExcluded.addEventListener("click", () => saveFile(excluded.sort().join("\n"), "All_books_being_excluded"));
 
@@ -265,7 +273,11 @@ let linkButton = document.getElementById("link-all-things");
 linkButton.addEventListener("click", () => doTheLinkingUp(decorated));
 
 linkedDictionaryCopyButton.addEventListener("click", () =>
-  navigator.clipboard.writeText(JSON.stringify(linkedDictionary, null, 4))
+  saveFile(
+    JSON.stringify(linkedDictionary, null, 4),
+    "LinkedUp-pli2en_" + determineWhichDictionary(dictionary[0].word).toLowerCase(),
+    "json"
+  )
 );
 
 let listOfUnLinkedCitations;
@@ -338,13 +350,13 @@ let makeLinkedListButton = document.getElementById("make-linked-lists");
 makeLinkedListButton.addEventListener("click", () => makelinkedLists(linkedDictionary));
 
 let linkingReportButton = document.getElementById("copy-linking-report");
-linkingReportButton.addEventListener("click", () => navigator.clipboard.writeText(linkingReport));
+linkingReportButton.addEventListener("click", () => saveFile(linkingReport, "LinkingReport", "md"));
 
 copyCompletedLinkingHtml.addEventListener("click", () =>
-  navigator.clipboard.writeText(listOfLinkedCitations.join("\n"))
+  saveFile(listOfLinkedCitations.join("\n"), "Linking-All_linked_citations")
 );
 copyDecoratedUnlinked.addEventListener("click", () =>
-  navigator.clipboard.writeText(listOfUnLinkedCitations.sort().join("\n"))
+  saveFile(listOfUnLinkedCitations.sort().join("\n"), "Linking-Unlinked_citations")
 );
 
 // this keeps you from clicking until page is loaded
