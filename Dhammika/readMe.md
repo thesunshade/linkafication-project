@@ -1,7 +1,7 @@
-# Dhammika decorating report Tue Feb 08 2022 14:44:41 GMT+0530 (India Standard Time)
-  <br><br>
+# Dhammika decorating report Tue Feb 08 2022 14:49:56 GMT+0530 (India Standard Time)
+  
   * [Raw Cleaned up dictionary file](https://raw.githubusercontent.com/thesunshade/linkafication-project/main/Dhammika/pli2en_dhammika.json)
-  * [Raw Decorated Dictionary File](https://raw.githubusercontent.com/thesunshade/linkafication-project/main/Dhammika/Reports/Dhammika-Decorated-pli2en_dhammika.json)
+  * [Raw Decorated Dictionary File](https://raw.githubusercontent.com/thesunshade/linkafication-project/main/Dhammika/Dhammika-Decorated-pli2en_dhammika.json)
 
   * 54 citations with complete links.<br>
   * 2322 citations decorated.
@@ -34,7 +34,7 @@ Just the frequency of individual books from list above.
 ### List of all non decorated citations that we are not ignoring
 This means that for some reason they *should* be decorated, but something is wrong with them. To see the list of those citations that are being ignored (either because we can't figure out how to turn them into links or because they aren't present on SC) you can check [this file](https://github.com/thesunshade/linkafication-project/blob/main/app/excludeList.js).
 * [Dhammika-Decor-All_Undecorated_citations_not_excluded.txt](https://github.com/thesunshade/linkafication-project/blob/main/Dhammika/Reports/Dhammika-Decor-All_Undecorated_citations_not_excluded.txt)<br>
-<br># Dhammika linking report Tue Feb 08 2022 14:44:48 GMT+0530 (India Standard Time)
+# Dhammika linking report Tue Feb 08 2022 14:50:02 GMT+0530 (India Standard Time)
   <br><br>
   * [Raw Linked Up Dictionary File](https://raw.githubusercontent.com/thesunshade/linkafication-project/main/Dhammika/Dhammika-LinkedUp-pli2en_dhammika.json)
 
@@ -44,7 +44,7 @@ This means that for some reason they *should* be decorated, but something is wro
 ### All 1978 links made through both decoration and linking process
 * [Dhammika-Linking-All_linked_citations.txt](https://github.com/thesunshade/linkafication-project/blob/main/Dhammika/Reports/Dhammika-Linking-All_linked_citations.txt)<br>
 
-## List of all 12 unlinked citations excluding Jataka citations<br><br>
+### List of all 12 unlinked citations excluding Jataka citations<br><br>
 There are 386 unlinked Jataka citations not included.
 
 * [Dhammika-Linking-Unlinked_citations_without_Jataka.txt](https://github.com/thesunshade/linkafication-project/blob/main/Dhammika/Reports/Dhammika-Linking-Unlinked_citations_without_Jataka.txt)<br>
