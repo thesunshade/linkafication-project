@@ -88,7 +88,7 @@ dictionarySelector.addEventListener("change", event => {
 });
 
 function saveFile(file, fileName, extension) {
-  if (extension === null) {
+  if (!extension) {
     extension = "txt";
   }
   var a = document.createElement("a");
@@ -143,7 +143,7 @@ function reportLinkWrapper(dictionaryName, fileName, extension) {
   if (!extension) {
     extension = "txt";
   }
-  return `[${fileName}.${extension}](https://github.com/thesunshade/linkafication-project/blob/main/${dictionaryName}/Reports/${dictionaryName}-${fileName}.${extension})`;
+  return `* [${dictionaryName}-${fileName}.${extension}](https://github.com/thesunshade/linkafication-project/blob/main/${dictionaryName}/Reports/${dictionaryName}-${fileName}.${extension})<br>`;
 }
 
 function makeDecoratedLists(decorated) {
@@ -184,37 +184,47 @@ function makeDecoratedLists(decorated) {
   //
   //DECORATION REPORT
   decorationReport = `# ${determineWhichDictionary(dictionary[0].word)} decorating report ${Date().toLocaleString()}
-  <br><br>
+  
   * [Raw Cleaned up dictionary file](https://raw.githubusercontent.com/thesunshade/linkafication-project/main/${determineWhichDictionary(
     dictionary[0].word
   )}/pli2en_${determineWhichDictionary(dictionary[0].word).toLowerCase()}.json)
   * [Raw Decorated Dictionary File](https://raw.githubusercontent.com/thesunshade/linkafication-project/main/${determineWhichDictionary(
     dictionary[0].word
-  )}/Reports/${determineWhichDictionary(dictionary[0].word)}-Decorated-pli2en_${determineWhichDictionary(
+  )}/${determineWhichDictionary(dictionary[0].word)}-Decorated-pli2en_${determineWhichDictionary(
     dictionary[0].word
   ).toLowerCase()}.json)
 
   * ${listOfFinalLinksThroughDecorationOnly.length} citations with complete links.<br>
   * ${listOfAllDecorated.length - listOfFinalLinksThroughDecorationOnly.length} citations decorated.
+  * ${listOfAllUndecorated.length} citations undecorated
+  * ${listOfNonExcludedUndecorated.length} undecorated that should have been
 
-  ## Links made through decoration process<br><br>
+### Links made through decoration process
   Some citations match the refrence ids enough that it is possible to create the final link at the decoration stage. This is them.
-${reportLinkWrapper("Decor-List_of_final_links_made_through_decoration_only", currentDictionary)}
+${reportLinkWrapper(currentDictionary, "Decor-List_of_final_links_made_through_decoration_only")}
 
-## List of all decorated citations<br><br>
+### List of all decorated citations
 This includes both those that are final links as well as those only decorated.
-${detailsWrapper(countUniqueItems(listOfAllDecorated.sort()))}
+${reportLinkWrapper(currentDictionary, "Decor-All_decorated_citations_with_markup")}
 
-## List of all decorated citations without html markup<br><br>
+### List of all decorated citations without html markup
 Just the citations from the list above
-${detailsWrapper(countUniqueItems(cleanedListOfDecoratedCitations))}
+${reportLinkWrapper(currentDictionary, "Decor-Citations_Only_all_decorated_citations")}
 
-## List of all not decorated citations<br><br>
-${detailsWrapper(countUniqueItems(listOfAllUndecorated.sort()))}
+### Count of books decorated
+Just the frequency of individual books from list above.
+${reportLinkWrapper(currentDictionary, "Decor-Book_Names_Only_all_decorated_citations")}
 
-## List of all non decorated citations that we are not ignoring<br><br>
-This means that for some reason they *should* be decorated, but something is wrong with them. To see the list of those citations that are being ignored (either because we can't figure out how to turn them into links or because they aren't present on SC) you can check [this file](https://github.com/thesunshade/linkafication-project/blob/main/app/excludeList.js).
-${detailsWrapper(countUniqueItems(listOfNonExcludedUndecorated.sort()))}
+### List of all not decorated citations
+${reportLinkWrapper(currentDictionary, "Decor-All_Undecorated_citations")}
+
+### Count of books Undecorated
+Just the frequency of individual books from list above.
+${reportLinkWrapper(currentDictionary, "Decor-Books_only_all_Undecorated_citations")}
+
+### List of all non decorated citations that we are not ignoring
+This means that for some reason they *should* be decorated, but something is wrong with them. To see the list of those citations that are being ignored (either because we can't figure out how to turn them into links or because they aren't present on SC) you can check [this file](https://github.com/thesunshade/linkafication-project/blob/main/app/functions/excludeList.js).
+${reportLinkWrapper(currentDictionary, "Decor-All_Undecorated_citations_not_excluded")}
 `;
   // end of decoration report
   decorationReportButton.classList.remove("hidden");
@@ -318,25 +328,29 @@ function makelinkedLists(linkedDictionary) {
   `;
 
   linkingReportButton.classList.remove("hidden");
+  const currentDictionary = determineWhichDictionary(dictionary[0].word);
 
-  linkingReport = `# ${determineWhichDictionary(dictionary[0].word)} linking report ${Date().toLocaleString()}
-  <br><br>
+  // LINKING REPORT
+  linkingReport =
+    decorationReport +
+    `# ${determineWhichDictionary(dictionary[0].word)} linking report ${Date().toLocaleString()}
+
   * [Raw Linked Up Dictionary File](https://raw.githubusercontent.com/thesunshade/linkafication-project/main/${determineWhichDictionary(
     dictionary[0].word
   )}/${determineWhichDictionary(dictionary[0].word)}-LinkedUp-pli2en_${determineWhichDictionary(
-    dictionary[0].word
-  ).toLowerCase()}.json)
+      dictionary[0].word
+    ).toLowerCase()}.json)
 
   * ${listOfLinkedCitations.length} citations with complete links.<br>
   * ${listOfUnLinkedCitations.length} unlinked citations.
 
-  ## All ${listOfLinkedCitations.length} links made through both decoration and linking process<br><br>
-${detailsWrapper(countUniqueItems(listOfLinkedCitations))}
+### All ${listOfLinkedCitations.length} links made through both decoration and linking process
+${reportLinkWrapper(currentDictionary, "Linking-All_linked_citations")}
 
-## List of all ${listWithoutJataka.length} unlinked citations excluding Jataka citations<br><br>
+### List of all ${listWithoutJataka.length} unlinked citations excluding Jataka citations<br><br>
 There are ${listOfUnLinkedCitations.length - listWithoutJataka.length} unlinked Jataka citations not included.
 
-${detailsWrapper(countUniqueItems(listWithoutJataka.sort()))}
+${reportLinkWrapper(currentDictionary, "Linking-Unlinked_citations_without_Jataka")}
 `;
 
   // reveal available areas and buttons
@@ -350,13 +364,13 @@ let makeLinkedListButton = document.getElementById("make-linked-lists");
 makeLinkedListButton.addEventListener("click", () => makelinkedLists(linkedDictionary));
 
 let linkingReportButton = document.getElementById("copy-linking-report");
-linkingReportButton.addEventListener("click", () => saveFile(linkingReport, "LinkingReport", "md"));
+linkingReportButton.addEventListener("click", () => saveFile(linkingReport, "readMe", "md"));
 
 copyCompletedLinkingHtml.addEventListener("click", () =>
   saveFile(listOfLinkedCitations.join("\n"), "Linking-All_linked_citations")
 );
 copyDecoratedUnlinked.addEventListener("click", () =>
-  saveFile(listOfUnLinkedCitations.sort().join("\n"), "Linking-Unlinked_citations")
+  saveFile(listWithoutJataka.sort().join("\n"), "Linking-Unlinked_citations_without_Jataka")
 );
 
 // this keeps you from clicking until page is loaded
