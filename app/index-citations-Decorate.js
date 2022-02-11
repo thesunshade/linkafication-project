@@ -21,6 +21,7 @@ import {
   listDecoratedCitationsCitationsOnly,
   removeExcludedCitations,
 } from "./functions/makeDecoratedListsFunctions.js";
+import removeDecoration from "./functions/removeDecoration.js";
 
 let dictionarySelector = document.getElementById("dictionaries");
 let decorateArea = document.getElementById("decorate-area");
@@ -269,6 +270,7 @@ copyExcluded.addEventListener("click", () => saveFile(excluded.sort().join("\n")
 // Link up
 //
 let linkedDictionary;
+let undecoratedLinkedDictionary;
 function doTheLinkingUp(decorated) {
   let start = Date.now();
   linkedDictionary = linkDecorated(decorated);
@@ -277,6 +279,9 @@ function doTheLinkingUp(decorated) {
   linkedDictionaryCopyButton.classList.remove("hidden");
   makeLinkedListButton.classList.remove("hidden");
   linkListArea.classList.remove("hidden");
+  undecoratedLinkedDictionary = removeDecoration(linkedDictionary);
+  console.log("undecorated Linked dictionary👇🏻");
+  console.log(undecoratedLinkedDictionary);
 }
 
 let linkButton = document.getElementById("link-all-things");
